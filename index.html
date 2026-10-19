@@ -371,21 +371,24 @@
     let selectedPaymentMethod = 'cash';
     let isAdminLoggedIn = false;
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('bookingDate').value = selectedDate;
-      document.getElementById('bookingDate').min = selectedDate;
+    window.onload = function() {
+      const dateInput = document.getElementById('bookingDate');
+      if (dateInput) {
+        dateInput.value = selectedDate;
+        dateInput.min = selectedDate;
+        dateInput.addEventListener('change', (e) => {
+          selectedDate = e.target.value;
+          selectedSlots = [];
+          updateSelectedDateDisplay();
+          renderSlotsGrid();
+          updateCheckoutSummary();
+        });
+      }
+
       renderStationList();
       updateSelectedDateDisplay();
       renderSlotsGrid();
-
-      document.getElementById('bookingDate').addEventListener('change', (e) => {
-        selectedDate = e.target.value;
-        selectedSlots = [];
-        updateSelectedDateDisplay();
-        renderSlotsGrid();
-        updateCheckoutSummary();
-      });
-    });
+    };
 
     function showToast(msg) {
       const toast = document.getElementById('toast');
@@ -396,6 +399,7 @@
 
     function renderStationList() {
       const container = document.getElementById('stationList');
+      if (!container) return;
       container.innerHTML = STATIONS.map(st => `
         <div onclick="selectStation('${st.id}')" class="p-3.5 rounded-xl border ${st.id === currentStation.id ? 'border-cyber-cyan bg-cyan-950/20 glow-cyan' : 'border-gray-800 bg-gray-900'} hover:border-gray-600 cursor-pointer transition-all flex justify-between items-center">
           <div>
@@ -410,24 +414,27 @@
     function selectStation(id) {
       currentStation = STATIONS.find(s => s.id === id);
       selectedSlots = [];
-      document.getElementById('selectedStationTitle').innerText = currentStation.name;
+      const titleEl = document.getElementById('selectedStationTitle');
+      if (titleEl) titleEl.innerText = currentStation.name;
       renderStationList();
       renderSlotsGrid();
       updateCheckoutSummary();
     }
 
     function updateSelectedDateDisplay() {
-      document.getElementById('selectedDateDisplay').innerText = `নির্বাচিত তারিখ: ${selectedDate}`;
+      const displayEl = document.getElementById('selectedDateDisplay');
+      if (displayEl) displayEl.innerText = `নির্বাচিত তারিখ: ${selectedDate}`;
     }
 
     function getBookedSlotsForCurrentStation() {
       const allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
       return allBookings.filter(b => b.date === selectedDate && b.stationId === currentStation.id)
-                        .flatMap(b => Array.isArray(b.slots) ? b.slots : []);
+                        .flatMap(b => Array.isArray(b.slots) ? b.slots : [b.slots]);
     }
 
     function renderSlotsGrid() {
       const grid = document.getElementById('slotGrid');
+      if (!grid) return;
       const bookedSlots = getBookedSlotsForCurrentStation();
 
       grid.innerHTML = TIME_SLOTS.map(slot => {
@@ -466,9 +473,13 @@
     function updateCheckoutSummary() {
       const count = selectedSlots.length;
       const total = count * currentStation.price;
-      document.getElementById('selectedSlotsCount').innerText = `${count} টি স্লট`;
-      document.getElementById('totalPrice').innerText = `(৳ ${total})`;
-      document.getElementById('checkoutBtn').disabled = count === 0;
+      const countEl = document.getElementById('selectedSlotsCount');
+      const priceEl = document.getElementById('totalPrice');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      if (countEl) countEl.innerText = `${count} টি স্লট`;
+      if (priceEl) priceEl.innerText = `(৳ ${total})`;
+      if (checkoutBtn) checkoutBtn.disabled = count === 0;
     }
 
     function openCheckoutModal() {
@@ -641,6 +652,8 @@
       const allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
       const query = document.getElementById('adminSearch').value.toLowerCase();
       const tableBody = document.getElementById('adminBookingTable');
+
+      if (!tableBody) return;
 
       const filtered = allBookings.filter(b => 
         (b.customerName && b.customerName.toLowerCase().includes(query)) || 
