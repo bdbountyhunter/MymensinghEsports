@@ -16,8 +16,8 @@
         extend: {
           colors: {
             cyber: {
-              black: '#05050b',
-              card: '#0d0e1a',
+              black: '#030308',
+              card: '#0a0b16',
               accent: '#8b5cf6',
               cyan: '#06b6d4',
               pink: '#ec4899',
@@ -34,24 +34,24 @@
     @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Orbitron:wght@600;800;900&display=swap');
     body { 
       font-family: 'Hind Siliguri', sans-serif; 
-      background-color: #05050b; 
+      background-color: #030308; 
       color: #f3f4f6;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        linear-gradient(to bottom, rgba(3, 3, 8, 0.88), rgba(10, 11, 22, 0.95)),
+        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
     .font-orbitron { font-family: 'Orbitron', sans-serif; }
-    .glow-cyan { box-shadow: 0 0 20px rgba(6, 182, 212, 0.25); }
-    .glow-accent { box-shadow: 0 0 25px rgba(139, 92, 246, 0.25); }
-    .glass-panel { background: rgba(13, 14, 26, 0.85); backdrop-filter: blur(12px); }
+    .glow-cyan { box-shadow: 0 0 25px rgba(6, 182, 212, 0.3); }
+    .glow-accent { box-shadow: 0 0 30px rgba(139, 92, 246, 0.35); }
+    .glass-panel { background: rgba(10, 11, 22, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(139, 92, 246, 0.2); }
 
     @media print {
       body * { visibility: hidden; }
-      #printableReceiptArea, #printableReceiptArea * { visibility: visible; }
-      #printableReceiptArea { position: absolute; left: 0; top: 0; width: 100%; color: black; background: white; padding: 20px; }
+      #printableArea, #printableArea * { visibility: visible; }
+      #printableArea { position: absolute; left: 0; top: 0; width: 100%; color: black; background: white; padding: 20px; }
       .no-print { display: none !important; }
     }
   </style>
@@ -59,14 +59,14 @@
 <body class="min-h-screen text-gray-100 flex flex-col justify-between selection:bg-cyber-cyan selection:text-black">
 
   <!-- Toast Notification -->
-  <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-all duration-300 glass-panel border-l-4 border-cyber-cyan p-4 rounded-xl shadow-2xl text-white flex items-center gap-3 border border-gray-800">
+  <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-all duration-300 glass-panel border-l-4 border-cyber-cyan p-4 rounded-xl shadow-2xl text-white flex items-center gap-3">
     <i id="toastIcon" class="fas fa-info-circle text-cyber-cyan text-xl"></i>
     <span id="toastMsg" class="text-sm font-bold"></span>
   </div>
 
   <!-- Top Header Navigation -->
-  <header class="border-b border-gray-800/80 glass-panel sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+  <header class="border-b border-purple-900/40 glass-panel sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-4">
       <div class="flex items-center gap-3.5">
         <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-900 via-cyber-accent to-cyber-cyan p-0.5 shadow-lg glow-cyan flex items-center justify-center">
           <div class="w-full h-full bg-cyber-black rounded-[10px] flex items-center justify-center text-cyber-cyan text-2xl">
@@ -78,11 +78,11 @@
             THE GAME ROOM
           </h1>
           <div class="flex flex-wrap items-center gap-2 mt-1 text-xs">
-            <span class="bg-purple-950/60 border border-purple-800/80 text-purple-200 px-2.5 py-0.5 rounded-full font-medium flex items-center gap-1.5">
+            <span class="bg-purple-950/70 border border-purple-800/80 text-purple-200 px-2.5 py-0.5 rounded-full font-medium flex items-center gap-1.5">
               <i class="fas fa-map-marker-alt text-cyber-pink"></i> <span data-i18n="address">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ</span>
             </span>
-            <span class="bg-cyan-950/60 border border-cyan-800/80 text-cyan-200 px-2.5 py-0.5 rounded-full font-bold font-orbitron flex items-center gap-1.5">
-              <i class="fas fa-phone-alt text-cyber-cyan"></i> +880 1953013236
+            <span class="bg-cyan-950/70 border border-cyan-800/80 text-cyan-200 px-2.5 py-0.5 rounded-full font-bold font-orbitron flex items-center gap-1.5">
+              <i class="fas fa-phone-alt text-cyber-cyan"></i> <span id="headerPhone">+880 1953013236</span>
             </span>
           </div>
         </div>
@@ -109,7 +109,7 @@
   <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
     
     <!-- Hero Banner -->
-    <section class="mb-8 rounded-2xl bg-gradient-to-r from-purple-900/40 via-cyber-card to-cyan-900/40 p-6 md:p-8 border border-gray-800/80 shadow-2xl relative overflow-hidden glow-accent glass-panel">
+    <section class="mb-8 rounded-2xl bg-gradient-to-r from-purple-900/50 via-cyber-card to-cyan-900/50 p-6 md:p-8 border border-purple-500/30 shadow-2xl relative overflow-hidden glow-accent glass-panel">
       <div class="max-w-2xl relative z-10">
         <span class="inline-block px-3 py-1 bg-cyber-accent/20 text-cyber-accent text-xs font-extrabold rounded-full mb-3 border border-cyber-accent/40" data-i18n="heroBadge">
           ⚡ প্রিমিয়াম গেমিং এক্সপেরিয়েন্স
@@ -118,7 +118,7 @@
           আপনার পছন্দমতো স্লট বুক করুন
         </h2>
         <p class="text-gray-300 text-sm md:text-base font-medium" id="heroDesc">
-          সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।
+          সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold" id="heroRate">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।
         </p>
       </div>
     </section>
@@ -128,14 +128,14 @@
       
       <!-- Left Column: Station Selector & Date -->
       <div class="lg:col-span-1 space-y-6">
-        <div class="glass-panel p-5 rounded-2xl border border-gray-800/80 shadow-lg">
+        <div class="glass-panel p-5 rounded-2xl shadow-lg">
           <label class="block text-sm font-bold text-gray-300 mb-2 flex items-center gap-2">
             <i class="far fa-calendar-alt text-cyber-cyan"></i> <span data-i18n="labelDate">বুকিংয়ের তারিখ সিলেক্ট করুন:</span>
           </label>
           <input type="date" id="bookingDate" class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyber-cyan transition font-bold">
         </div>
 
-        <div class="glass-panel p-5 rounded-2xl border border-gray-800/80 shadow-lg">
+        <div class="glass-panel p-5 rounded-2xl shadow-lg">
           <h3 class="text-md font-bold text-white mb-4 flex items-center gap-2">
             <i class="fas fa-gamepad text-cyber-pink"></i> <span data-i18n="labelStation">গেমিং স্টেশন নির্বাচন করুন:</span>
           </h3>
@@ -146,8 +146,8 @@
 
       <!-- Right Column: Time Slots -->
       <div class="lg:col-span-2">
-        <div class="glass-panel p-6 rounded-2xl border border-gray-800/80 shadow-lg">
-          <div class="flex flex-wrap justify-between items-center mb-6 gap-3 border-b border-gray-800/80 pb-4">
+        <div class="glass-panel p-6 rounded-2xl shadow-lg">
+          <div class="flex flex-wrap justify-between items-center mb-6 gap-3 border-b border-gray-800 pb-4">
             <div>
               <h3 id="selectedStationTitle" class="text-xl font-black text-white font-orbitron">
                 PS5 Console 1
@@ -182,16 +182,15 @@
 
     </section>
 
-    <!-- Admin Panel (Protected with Sales Analytics) -->
+    <!-- Admin Panel -->
     <section id="adminSection" class="hidden space-y-6">
-      <div class="glass-panel p-6 rounded-2xl border border-gray-800/80 shadow-lg">
+      <div class="glass-panel p-6 rounded-2xl shadow-lg" id="printableArea">
         
-        <!-- Header Controls -->
         <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
           <h2 class="text-2xl font-black text-white font-orbitron flex items-center gap-2">
             <i class="fas fa-chart-line text-cyber-cyan"></i> <span data-i18n="adminHeader">বুকিং ও সেলস ড্যাশবোর্ড</span>
           </h2>
-          <div class="flex gap-2">
+          <div class="flex gap-2 no-print">
             <button onclick="adminLogout()" class="px-3.5 py-1.5 rounded-lg bg-red-950/60 border border-red-800 text-red-300 hover:bg-red-900 text-xs font-bold transition">
               <i class="fas fa-sign-out-alt"></i> <span data-i18n="adminLogout">লগআউট</span>
             </button>
@@ -201,35 +200,58 @@
           </div>
         </div>
 
-        <!-- Sales & Revenue Overview Cards -->
+        <!-- Custom Date Range Sales Filter -->
+        <div class="bg-gray-900/90 p-4 rounded-xl border border-purple-800/60 mb-6 no-print">
+          <h4 class="text-xs font-extrabold text-cyber-cyan mb-3 flex items-center gap-2">
+            <i class="fas fa-filter"></i> কাস্টম তারিখ অনুযায়ী সেলস রিপোর্ট ফিল্টার করুন:
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+            <div>
+              <label class="block text-[11px] text-gray-400 font-bold mb-1">From Date (শুরুর তারিখ):</label>
+              <input type="date" id="filterFromDate" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-gray-400 font-bold mb-1">To Date (শেষের তারিখ):</label>
+              <input type="date" id="filterToDate" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-white">
+            </div>
+            <div class="flex gap-2">
+              <button onclick="filterSalesByDate()" class="w-full py-2 bg-cyber-accent hover:bg-purple-600 text-white font-bold rounded-lg text-xs transition">
+                ফিল্টার করুন
+              </button>
+
+              <button onclick="downloadPdfReport()" class="w-full py-2 bg-cyber-green hover:bg-emerald-600 text-white font-bold rounded-lg text-xs transition flex items-center justify-center gap-1">
+                <i class="fas fa-file-pdf"></i> PDF রিপোর্ট
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div class="bg-gray-900/90 border border-cyber-cyan/40 p-4 rounded-xl shadow-lg">
-            <span class="text-xs text-gray-400 font-bold block mb-1">আজকের সেলস (Today)</span>
+            <span class="text-xs text-gray-400 font-bold block mb-1" data-i18n="statTodayLbl">আজকের সেলস (Today)</span>
             <h3 id="statToday" class="text-2xl font-black text-cyber-cyan font-orbitron">৳ 0</h3>
           </div>
           <div class="bg-gray-900/90 border border-cyber-accent/40 p-4 rounded-xl shadow-lg">
-            <span class="text-xs text-gray-400 font-bold block mb-1">চলতি মাসের সেলস (30 Days)</span>
+            <span class="text-xs text-gray-400 font-bold block mb-1" id="filteredRangeLbl">ফিল্টারকৃত সেলস (Selected Date)</span>
             <h3 id="statMonth" class="text-2xl font-black text-cyber-accent font-orbitron">৳ 0</h3>
           </div>
           <div class="bg-gray-900/90 border border-cyber-green/40 p-4 rounded-xl shadow-lg">
-            <span class="text-xs text-gray-400 font-bold block mb-1">সর্বমোট সেলস (All-Time)</span>
+            <span class="text-xs text-gray-400 font-bold block mb-1" data-i18n="statTotalLbl">সর্বমোট সেলস (All-Time)</span>
             <h3 id="statTotal" class="text-2xl font-black text-cyber-green font-orbitron">৳ 0</h3>
           </div>
           <div class="bg-gray-900/90 border border-cyber-pink/40 p-4 rounded-xl shadow-lg">
-            <span class="text-xs text-gray-400 font-bold block mb-1">মোট স্লট বুকিং সংখ্যা</span>
+            <span class="text-xs text-gray-400 font-bold block mb-1" data-i18n="statCountLbl">মোট স্লট বুকিং সংখ্যা</span>
             <h3 id="statCount" class="text-2xl font-black text-cyber-pink font-orbitron">0 টি</h3>
           </div>
         </div>
 
-        <!-- Filter Controls -->
-        <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+        <div class="flex flex-wrap justify-between items-center gap-4 mb-4 no-print">
           <input type="text" id="adminSearch" onkeyup="renderAdminTable()" placeholder="Search..." class="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-sm text-white focus:outline-none w-full sm:w-64 font-medium">
           <button onclick="clearAllBookings()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition shadow-lg">
             <i class="fas fa-trash-alt"></i> <span data-i18n="adminReset">সব বুকিং রিসেট করুন</span>
           </button>
         </div>
 
-        <!-- Bookings Table -->
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm text-gray-300">
             <thead class="bg-gray-900/90 text-gray-400 font-bold uppercase text-xs">
@@ -239,9 +261,9 @@
                 <th class="p-3" data-i18n="thPhone">মোবাইল</th>
                 <th class="p-3" data-i18n="thStation">স্টেশন</th>
                 <th class="p-3" data-i18n="thSlot">বুকিং করা সময়/স্লট</th>
-                <th class="p-3">পেমেন্ট & TrxID</th>
-                <th class="p-3">মূল্য</th>
-                <th class="p-3">অ্যাকশন</th>
+                <th class="p-3" data-i18n="thPayment">পেমেন্ট & TrxID</th>
+                <th class="p-3" data-i18n="thAmount">মূল্য</th>
+                <th class="p-3 no-print" data-i18n="thAction">অ্যাকশন</th>
               </tr>
             </thead>
             <tbody id="adminBookingTable" class="divide-y divide-gray-800">
@@ -256,7 +278,7 @@
 
   <!-- Admin Login Modal -->
   <div id="adminLoginModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="glass-panel w-full max-w-sm rounded-2xl border border-gray-700/80 shadow-2xl p-6 relative">
+    <div class="glass-panel w-full max-w-sm rounded-2xl shadow-2xl p-6 relative">
       <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
         <i class="fas fa-times"></i>
       </button>
@@ -284,7 +306,7 @@
 
   <!-- Checkout / Payment Modal -->
   <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="glass-panel w-full max-w-md rounded-2xl border border-gray-700/80 shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+    <div class="glass-panel w-full max-w-md rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
       <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
         <i class="fas fa-times"></i>
       </button>
@@ -339,8 +361,8 @@
             নিচের নম্বরে <strong>Send Money / Cash-In</strong> করে ট্রানজেকশন আইডিটি প্রদান করুন:
           </p>
           <div class="flex items-center justify-between bg-gray-900 p-2.5 rounded-lg border border-purple-900">
-            <span class="font-bold text-white font-orbitron">+880 1953013236</span>
-            <button type="button" onclick="copyMerchantNumber('+8801953013236')" class="text-cyber-cyan hover:underline text-xs font-bold flex items-center gap-1">
+            <span class="font-bold text-white font-orbitron" id="modalMerchantNum">+880 1953013236</span>
+            <button type="button" onclick="copyMerchantNumber()" class="text-cyber-cyan hover:underline text-xs font-bold flex items-center gap-1">
               <i class="far fa-copy"></i> <span data-i18n="copyBtn">কপি করুন</span>
             </button>
           </div>
@@ -373,9 +395,9 @@
 
       <div class="text-center border-b pb-4 mb-4 border-gray-200">
         <h2 class="text-2xl font-black font-orbitron text-purple-700">THE GAME ROOM</h2>
-        <p class="text-xs text-gray-600 font-semibold">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ</p>
-        <p class="text-xs text-gray-600">হটলাইন: +880 1953013236</p>
-        <span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded mt-1">OFFICIAL BOOKING RECEIPT</span>
+        <p class="text-xs text-gray-600 font-semibold" id="memoAddress">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ</p>
+        <p class="text-xs text-gray-600" id="memoHotline">হটলাইন: +880 1953013236</p>
+        <span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded mt-1" id="memoBadge">OFFICIAL BOOKING RECEIPT</span>
       </div>
 
       <div id="invoiceContent" class="text-xs space-y-2 mb-6">
@@ -383,9 +405,9 @@
 
       <div class="no-print border-t pt-4 flex gap-2">
         <button onclick="window.print()" class="w-full py-2 bg-purple-600 text-white font-bold rounded-lg text-xs hover:bg-purple-700 transition flex items-center justify-center gap-2">
-          <i class="fas fa-print"></i> প্রিন্ট করুন / PDF মেমো
+          <i class="fas fa-print"></i> <span data-i18n="printBtn">প্রিন্ট করুন / PDF মেমো</span>
         </button>
-        <button onclick="closeInvoiceModal()" class="w-full py-2 bg-gray-200 text-gray-800 font-bold rounded-lg text-xs hover:bg-gray-300 transition">
+        <button onclick="closeInvoiceModal()" class="w-full py-2 bg-gray-200 text-gray-800 font-bold rounded-lg text-xs hover:bg-gray-300 transition" data-i18n="closeBtn">
           বন্ধ করুন
         </button>
       </div>
@@ -393,7 +415,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-800/80 glass-panel py-6 mt-12 text-center text-xs text-gray-500 font-medium">
+  <footer class="border-t border-purple-900/40 glass-panel py-6 mt-12 text-center text-xs text-gray-400 font-medium">
     <p>© 2026 The Game Room. All Rights Reserved.</p>
     <p class="mt-1" data-i18n="footerAddress">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236</p>
   </footer>
@@ -404,10 +426,11 @@
     const translations = {
       BN: {
         address: "কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ",
+        phoneNum: "+৮৮০ ১৯৫৩০ ১৩২৩৬",
         adminBtn: "অ্যাডমিন প্যানেল",
         heroBadge: "⚡ প্রিমিয়াম গেমিং এক্সপেরিয়েন্স",
         heroTitle: "আপনার পছন্দমতো স্লট বুক করুন",
-        heroDesc: 'সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।',
+        heroRateText: "১৫০ টাকা / ঘণ্টা",
         labelDate: "বুকিংয়ের তারিখ সিলেক্ট করুন:",
         labelStation: "গেমিং স্টেশন নির্বাচন করুন:",
         legendAvailable: "ফাঁকা",
@@ -425,6 +448,9 @@
         thPhone: "মোবাইল",
         thStation: "স্টেশন",
         thSlot: "বুকিং করা সময়/স্লট",
+        thPayment: "পেমেন্ট & TrxID",
+        thAmount: "মূল্য",
+        thAction: "অ্যাকশন",
         adminLoginTitle: "অ্যাডমিন পাসওয়ার্ড প্রদান করুন",
         adminLoginSub: "ডাটা সুরক্ষার জন্য এডমিন প্রবেশাধিকার সংরক্ষিত",
         adminPassError: "ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।",
@@ -448,9 +474,14 @@
         trxMinMsg: "অন্তত ৮ অক্ষরের ট্রানজেকশন আইডি প্রদান করুন।",
         trxVerifiedMsg: "ট্রানজেকশন আইডি ভেরিফাইড হয়েছে।",
         submitBooking: "বুকিং সম্পন্ন করুন",
-        footerAddress: "কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236",
+        footerAddress: "কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +৮৮০ ১৯৫৩০ ১৩২৩৬",
         dateDisplayPrefix: "নির্বাচিত তারিখ: ",
         slotsCountSuffix: " টি স্লট",
+        statTodayLbl: "আজকের সেলস (Today)",
+        statTotalLbl: "সর্বমোট সেলস (All-Time)",
+        statCountLbl: "মোট স্লট বুকিং সংখ্যা",
+        printBtn: "প্রিন্ট করুন / PDF মেমো",
+        closeBtn: "বন্ধ করুন",
         toastTrxCopied: "মার্চেন্ট নম্বর কপি হয়েছে!",
         toastTrxError: "অনুগ্রহ করে সঠিক ট্রানজেকশন আইডি প্রদান করুন",
         toastAdminLogin: "এডমিন হিসেবে সফলভাবে লগইন করেছেন",
@@ -460,10 +491,11 @@
       },
       EN: {
         address: "Kulsum Market 2nd Floor, Maskanda, Mymensingh",
+        phoneNum: "+880 1953013236",
         adminBtn: "Admin Panel",
         heroBadge: "⚡ Premium Gaming Experience",
         heroTitle: "Book Your Slot Today",
-        heroDesc: 'Flat Rate from 10:00 AM to 10:00 PM <strong class="text-cyber-cyan font-bold">150 BDT / Hour</strong> (1 or 2 Players).',
+        heroRateText: "150 BDT / Hour",
         labelDate: "Select Booking Date:",
         labelStation: "Select Gaming Station:",
         legendAvailable: "Available",
@@ -481,6 +513,9 @@
         thPhone: "Phone",
         thStation: "Station",
         thSlot: "Booked Time/Slots",
+        thPayment: "Payment & TrxID",
+        thAmount: "Amount",
+        thAction: "Action",
         adminLoginTitle: "Enter Admin Password",
         adminLoginSub: "Access restricted for security",
         adminPassError: "Wrong password! Try again.",
@@ -507,6 +542,11 @@
         footerAddress: "Kulsum Market 2nd Floor, Maskanda, Mymensingh | Hotline: +880 1953013236",
         dateDisplayPrefix: "Selected Date: ",
         slotsCountSuffix: " Slot(s)",
+        statTodayLbl: "Today's Sales",
+        statTotalLbl: "Total Sales (All-Time)",
+        statCountLbl: "Total Slot Bookings",
+        printBtn: "Print / PDF Memo",
+        closeBtn: "Close",
         toastTrxCopied: "Merchant number copied!",
         toastTrxError: "Please provide a valid Transaction ID",
         toastAdminLogin: "Successfully logged in as admin",
@@ -538,13 +578,15 @@
       "09:00 PM - 10:00 PM"
     ];
 
-    const ADMIN_PASSWORD = "admin123";
+    // Password set to zerotohero
+    const ADMIN_PASSWORD = "zerotohero";
 
     let currentStation = STATIONS[0];
     let selectedDate = new Date().toISOString().split('T')[0];
     let selectedSlots = [];
     let selectedPaymentMethod = 'cash';
     let isAdminLoggedIn = false;
+    let filteredBookingsData = [];
 
     window.onload = function() {
       const dateInput = document.getElementById('bookingDate');
@@ -584,7 +626,7 @@
       renderStationList();
       updateSelectedDateDisplay();
       updateCheckoutSummary();
-      if (isAdminLoggedIn) renderAdminTable();
+      if (isAdminLoggedIn) calculateAnalyticsAndRenderTable();
     }
 
     function applyLanguage() {
@@ -595,8 +637,12 @@
         if (t[key]) el.innerText = t[key];
       });
 
-      document.getElementById('heroDesc').innerHTML = t.heroDesc;
-      document.getElementById('merchantNotice').innerHTML = t.merchantNotice;
+      document.getElementById('headerPhone').innerText = t.phoneNum;
+      document.getElementById('modalMerchantNum').innerText = t.phoneNum;
+      document.getElementById('heroDesc').innerHTML = (currentLang === 'BN') 
+        ? `সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold">${t.heroRateText}</strong> (১ জন বা ২ জন প্লেয়ার)।`
+        : `Flat Rate from 10:00 AM to 10:00 PM <strong class="text-cyber-cyan font-bold">${t.heroRateText}</strong> (1 or 2 Players).`;
+
       document.getElementById('adminSearch').placeholder = t.adminSearchPh;
       document.getElementById('custName').placeholder = t.custNamePh;
       document.getElementById('opt1Player').innerText = t.opt1Player;
@@ -615,7 +661,7 @@
       const container = document.getElementById('stationList');
       if (!container) return;
       container.innerHTML = STATIONS.map(st => `
-        <div onclick="selectStation('${st.id}')" class="p-3.5 rounded-xl border ${st.id === currentStation.id ? 'border-cyber-cyan bg-cyan-950/20 glow-cyan' : 'border-gray-800 bg-gray-900/80'} hover:border-gray-600 cursor-pointer transition-all flex justify-between items-center">
+        <div onclick="selectStation('${st.id}')" class="p-3.5 rounded-xl border ${st.id === currentStation.id ? 'border-cyber-cyan bg-cyan-950/25 glow-cyan' : 'border-gray-800 bg-gray-900/80'} hover:border-gray-600 cursor-pointer transition-all flex justify-between items-center">
           <div>
             <h4 class="font-bold text-sm text-white">${st.name}</h4>
             <p class="text-xs text-gray-400 mt-0.5 font-medium">${st.desc}</p>
@@ -756,8 +802,9 @@
       }
     }
 
-    function copyMerchantNumber(num) {
-      navigator.clipboard.writeText(num);
+    function copyMerchantNumber() {
+      const t = translations[currentLang];
+      navigator.clipboard.writeText(t.phoneNum);
       showToast('toastTrxCopied');
     }
 
@@ -805,22 +852,23 @@
     function openInvoiceModal(booking) {
       const container = document.getElementById('invoiceContent');
       const slotsText = Array.isArray(booking.slots) ? booking.slots.join(', ') : booking.slots;
+      const isBn = currentLang === 'BN';
 
       container.innerHTML = `
         <div class="border-b pb-2 mb-2">
-          <p><strong>বুকিং আইডি / Memo No:</strong> <span class="text-purple-700 font-bold">${booking.id}</span></p>
-          <p><strong>তারিখ & সময়:</strong> ${booking.date} | ${booking.timestamp ? new Date(booking.timestamp).toLocaleTimeString() : ''}</p>
+          <p><strong>${isBn ? 'বুকিং আইডি / Memo No' : 'Booking ID / Memo No'}:</strong> <span class="text-purple-700 font-bold">${booking.id}</span></p>
+          <p><strong>${isBn ? 'তারিখ ও সময়' : 'Date & Time'}:</strong> ${booking.date} | ${booking.timestamp ? new Date(booking.timestamp).toLocaleTimeString() : ''}</p>
         </div>
         <div class="space-y-1">
-          <p><strong>কাস্টমারের নাম:</strong> ${booking.customerName}</p>
-          <p><strong>মোবাইল নম্বর:</strong> ${booking.customerPhone}</p>
-          <p><strong>স্টেশন:</strong> ${booking.stationName}</p>
-          <p><strong>প্লেয়ার সংখ্যা:</strong> ${booking.players}</p>
-          <p><strong>বুকিংকৃত স্লট:</strong> ${slotsText}</p>
-          <p><strong>পেমেন্ট মেথড:</strong> ${booking.paymentMethod} (TrxID: ${booking.trxId})</p>
+          <p><strong>${isBn ? 'কাস্টমারের নাম' : 'Customer Name'}:</strong> ${booking.customerName}</p>
+          <p><strong>${isBn ? 'মোবাইল নম্বর' : 'Mobile Number'}:</strong> ${booking.customerPhone}</p>
+          <p><strong>${isBn ? 'স্টেশন' : 'Station'}:</strong> ${booking.stationName}</p>
+          <p><strong>${isBn ? 'প্লেয়ার সংখ্যা' : 'Players'}:</strong> ${booking.players}</p>
+          <p><strong>${isBn ? 'বুকিংকৃত স্লট' : 'Booked Slots'}:</strong> ${slotsText}</p>
+          <p><strong>${isBn ? 'পেমেন্ট মেথড' : 'Payment Method'}:</strong> ${booking.paymentMethod} (TrxID: ${booking.trxId})</p>
         </div>
         <div class="border-t pt-2 mt-2 font-bold text-sm text-purple-900 flex justify-between">
-          <span>মোট পরিশোধিত মূল্য:</span>
+          <span>${isBn ? 'মোট পরিশোধিত মূল্য' : 'Total Paid Amount'}:</span>
           <span>৳ ${booking.totalAmount}</span>
         </div>
       `;
@@ -876,45 +924,59 @@
       showToast('toastAdminLogout');
     }
 
+    function filterSalesByDate() {
+      const fromVal = document.getElementById('filterFromDate').value;
+      const toVal = document.getElementById('filterToDate').value;
+
+      if (!fromVal || !toVal) {
+        alert("অনুগ্রহ করে শুরুর তারিখ এবং শেষের তারিখ নির্বাচন করুন!");
+        return;
+      }
+
+      const allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
+      filteredBookingsData = allBookings.filter(b => b.date >= fromVal && b.date <= toVal);
+
+      let totalRangeSales = filteredBookingsData.reduce((sum, item) => sum + Number(item.totalAmount || 0), 0);
+
+      document.getElementById('statMonth').innerText = `৳ ${totalRangeSales}`;
+      document.getElementById('filteredRangeLbl').innerText = `ফিল্টারকৃত সেলস (${fromVal} - ${toVal})`;
+
+      renderFilteredAdminTable(filteredBookingsData);
+    }
+
+    function downloadPdfReport() {
+      window.print();
+    }
+
     function calculateAnalyticsAndRenderTable() {
       const allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
       const todayStr = new Date().toISOString().split('T')[0];
-      const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
 
       let todayTotal = 0;
-      let monthTotal = 0;
       let grandTotal = 0;
 
       allBookings.forEach(b => {
         const amt = Number(b.totalAmount) || 0;
         grandTotal += amt;
-
-        if (b.date === todayStr) {
-          todayTotal += amt;
-        }
-
-        const bDate = new Date(b.date);
-        if (bDate >= thirtyDaysAgo) {
-          monthTotal += amt;
-        }
+        if (b.date === todayStr) todayTotal += amt;
       });
 
       document.getElementById('statToday').innerText = `৳ ${todayTotal}`;
-      document.getElementById('statMonth').innerText = `৳ ${monthTotal}`;
+      document.getElementById('statMonth').innerText = `৳ ${grandTotal}`;
       document.getElementById('statTotal').innerText = `৳ ${grandTotal}`;
-      document.getElementById('statCount').innerText = `${allBookings.length} টি`;
+      document.getElementById('statCount').innerText = `${allBookings.length} ${currentLang === 'BN' ? 'টি' : 'Slots'}`;
 
-      renderAdminTable();
+      filteredBookingsData = allBookings;
+      renderFilteredAdminTable(allBookings);
     }
 
-    function renderAdminTable() {
-      const allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
+    function renderFilteredAdminTable(dataArray) {
       const query = document.getElementById('adminSearch').value.toLowerCase();
       const tableBody = document.getElementById('adminBookingTable');
 
       if (!tableBody) return;
 
-      const filtered = allBookings.filter(b => 
+      const filtered = dataArray.filter(b => 
         (b.customerName && b.customerName.toLowerCase().includes(query)) || 
         (b.customerPhone && b.customerPhone.includes(query))
       );
@@ -946,9 +1008,9 @@
               <div class="text-[10px] text-yellow-400 font-orbitron">${b.trxId || ''}</div>
             </td>
             <td class="p-3 text-xs font-black text-cyber-green">৳ ${b.totalAmount || 0}</td>
-            <td class="p-3 flex items-center gap-2">
+            <td class="p-3 flex items-center gap-2 no-print">
               <button onclick='printSingleInvoice(${JSON.stringify(b)})' class="bg-purple-900/60 hover:bg-purple-800 text-purple-200 border border-purple-700 px-2 py-1 rounded text-xs font-bold transition flex items-center gap-1">
-                <i class="fas fa-receipt"></i> মেমো
+                <i class="fas fa-receipt"></i> <span data-i18n="memoBtn">মেমো</span>
               </button>
               <button onclick="cancelBooking('${b.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold">
                 <i class="fas fa-trash"></i>
@@ -957,6 +1019,10 @@
           </tr>
         `;
       }).join('');
+    }
+
+    function renderAdminTable() {
+      renderFilteredAdminTable(filteredBookingsData);
     }
 
     function printSingleInvoice(bookingObj) {
