@@ -16,8 +16,8 @@
         extend: {
           colors: {
             cyber: {
-              black: '#07070f',
-              card: '#121324',
+              black: '#05050b',
+              card: '#0d0e1a',
               accent: '#8b5cf6',
               cyan: '#06b6d4',
               pink: '#ec4899',
@@ -32,47 +32,71 @@
   
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Orbitron:wght@600;800;900&display=swap');
-    body { font-family: 'Hind Siliguri', sans-serif; background-color: #07070f; color: #f3f4f6; }
+    body { 
+      font-family: 'Hind Siliguri', sans-serif; 
+      background-color: #05050b; 
+      color: #f3f4f6;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    }
     .font-orbitron { font-family: 'Orbitron', sans-serif; }
-    .glow-cyan { box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); }
-    .glow-accent { box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+    .glow-cyan { box-shadow: 0 0 20px rgba(6, 182, 212, 0.25); }
+    .glow-accent { box-shadow: 0 0 25px rgba(139, 92, 246, 0.25); }
+    .glow-pink { box-shadow: 0 0 20px rgba(236, 72, 153, 0.25); }
+    .glass-panel { background: rgba(13, 14, 26, 0.75); backdrop-filter: blur(12px); }
   </style>
 </head>
-<body class="min-h-screen bg-cyber-black text-gray-100 flex flex-col justify-between selection:bg-cyber-cyan selection:text-black">
+<body class="min-h-screen text-gray-100 flex flex-col justify-between selection:bg-cyber-cyan selection:text-black">
 
   <!-- Toast Notification -->
-  <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-all duration-300 bg-cyber-card border-l-4 border-cyber-cyan p-4 rounded-xl shadow-2xl text-white flex items-center gap-3">
+  <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-all duration-300 glass-panel border-l-4 border-cyber-cyan p-4 rounded-xl shadow-2xl text-white flex items-center gap-3 border border-gray-800">
     <i id="toastIcon" class="fas fa-info-circle text-cyber-cyan text-xl"></i>
-    <span id="toastMsg" class="text-sm font-semibold"></span>
+    <span id="toastMsg" class="text-sm font-bold"></span>
   </div>
 
   <!-- Top Header Navigation -->
-  <header class="border-b border-gray-800/80 bg-cyber-card/90 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-gray-800/80 glass-panel sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyber-accent via-purple-600 to-cyber-cyan flex items-center justify-center text-white text-xl font-black font-orbitron shadow-lg glow-cyan">
-          TGR
+      <div class="flex items-center gap-3.5">
+        <!-- Premium Custom Neon Gaming Controller Logo -->
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-900 via-cyber-accent to-cyber-cyan p-0.5 shadow-lg glow-cyan flex items-center justify-center">
+          <div class="w-full h-full bg-cyber-black rounded-[10px] flex items-center justify-center text-cyber-cyan text-2xl">
+            <i class="fas fa-gamepad transform -rotate-12"></i>
+          </div>
         </div>
         <div>
-          <h1 class="text-xl md:text-2xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-500 font-orbitron">
+          <h1 class="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-500 font-orbitron">
             THE GAME ROOM
           </h1>
-          <p class="text-xs text-gray-400 flex items-center gap-2 mt-0.5">
-            <span><i class="fas fa-map-marker-alt text-cyber-pink"></i> <span data-i18n="address">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ</span></span>
-            <span class="text-gray-600">|</span>
-            <span><i class="fas fa-phone-alt text-cyber-cyan"></i> +880 1953013236</span>
-          </p>
+          <!-- Highlighted Location & Contact Bar -->
+          <div class="flex flex-wrap items-center gap-2 mt-1 text-xs">
+            <span class="bg-purple-950/60 border border-purple-800/80 text-purple-200 px-2.5 py-0.5 rounded-full font-medium flex items-center gap-1.5">
+              <i class="fas fa-map-marker-alt text-cyber-pink"></i> <span data-i18n="address">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ</span>
+            </span>
+            <span class="bg-cyan-950/60 border border-cyan-800/80 text-cyan-200 px-2.5 py-0.5 rounded-full font-bold font-orbitron flex items-center gap-1.5">
+              <i class="fas fa-phone-alt text-cyber-cyan"></i> +880 1953013236
+            </span>
+          </div>
         </div>
       </div>
       
       <div class="flex items-center gap-3">
-        <!-- Language Switcher Button -->
-        <button onclick="toggleLanguage()" class="px-3.5 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-xs font-bold text-cyber-cyan transition-all border border-gray-700 flex items-center gap-2">
-          <i class="fas fa-globe"></i> <span id="langBtnLabel">ENG</span>
-        </button>
+        <!-- Dual Language Switcher Buttons -->
+        <div class="bg-gray-900/90 p-1 rounded-xl border border-gray-800 flex items-center gap-1">
+          <button id="btnLangBN" onclick="setLanguage('BN')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all bg-cyber-cyan text-gray-950 shadow">
+            বাংলা
+          </button>
+          <button id="btnLangEN" onclick="setLanguage('EN')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-gray-400 hover:text-white">
+            English
+          </button>
+        </div>
 
         <!-- Admin Panel Button -->
-        <button onclick="openAdminLoginModal()" class="px-4 py-2 rounded-lg bg-gray-800/80 hover:bg-cyber-accent/20 hover:border-cyber-accent text-xs font-bold text-gray-300 hover:text-white transition-all flex items-center gap-2 border border-gray-700">
+        <button onclick="openAdminLoginModal()" class="px-4 py-2 rounded-xl bg-gray-900/90 hover:bg-cyber-accent/20 hover:border-cyber-accent text-xs font-bold text-gray-300 hover:text-white transition-all flex items-center gap-2 border border-gray-700">
           <i class="fas fa-user-shield text-cyber-accent"></i> <span data-i18n="adminBtn">অ্যাডমিন প্যানেল</span>
         </button>
       </div>
@@ -83,16 +107,16 @@
   <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
     
     <!-- Hero Banner -->
-    <section class="mb-8 rounded-2xl bg-gradient-to-r from-purple-900/40 via-cyber-card to-cyan-900/40 p-6 md:p-8 border border-gray-800/80 shadow-2xl relative overflow-hidden glow-accent">
+    <section class="mb-8 rounded-2xl bg-gradient-to-r from-purple-900/40 via-cyber-card to-cyan-900/40 p-6 md:p-8 border border-gray-800/80 shadow-2xl relative overflow-hidden glow-accent glass-panel">
       <div class="max-w-2xl relative z-10">
-        <span class="inline-block px-3 py-1 bg-cyber-accent/20 text-cyber-accent text-xs font-bold rounded-full mb-3 border border-cyber-accent/40" data-i18n="heroBadge">
+        <span class="inline-block px-3 py-1 bg-cyber-accent/20 text-cyber-accent text-xs font-extrabold rounded-full mb-3 border border-cyber-accent/40" data-i18n="heroBadge">
           ⚡ প্রিমিয়াম গেমিং এক্সপেরিয়েন্স
         </span>
         <h2 class="text-3xl md:text-4xl font-black text-white mb-2 font-orbitron tracking-tight" data-i18n="heroTitle">
           আপনার পছন্দমতো স্লট বুক করুন
         </h2>
-        <p class="text-gray-300 text-sm md:text-base" id="heroDesc">
-          সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।
+        <p class="text-gray-300 text-sm md:text-base font-medium" id="heroDesc">
+          সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।
         </p>
       </div>
     </section>
@@ -104,15 +128,15 @@
       <div class="lg:col-span-1 space-y-6">
         
         <!-- Date Selector -->
-        <div class="bg-cyber-card p-5 rounded-2xl border border-gray-800/80 shadow-lg">
+        <div class="glass-panel p-5 rounded-2xl border border-gray-800/80 shadow-lg">
           <label class="block text-sm font-bold text-gray-300 mb-2 flex items-center gap-2">
             <i class="far fa-calendar-alt text-cyber-cyan"></i> <span data-i18n="labelDate">বুকিংয়ের তারিখ সিলেক্ট করুন:</span>
           </label>
-          <input type="date" id="bookingDate" class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyber-cyan transition">
+          <input type="date" id="bookingDate" class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyber-cyan transition font-bold">
         </div>
 
         <!-- Station Cards -->
-        <div class="bg-cyber-card p-5 rounded-2xl border border-gray-800/80 shadow-lg">
+        <div class="glass-panel p-5 rounded-2xl border border-gray-800/80 shadow-lg">
           <h3 class="text-md font-bold text-white mb-4 flex items-center gap-2">
             <i class="fas fa-gamepad text-cyber-pink"></i> <span data-i18n="labelStation">গেমিং স্টেশন নির্বাচন করুন:</span>
           </h3>
@@ -125,19 +149,19 @@
 
       <!-- Right Column: Interactive Time Slots -->
       <div class="lg:col-span-2">
-        <div class="bg-cyber-card p-6 rounded-2xl border border-gray-800/80 shadow-lg">
+        <div class="glass-panel p-6 rounded-2xl border border-gray-800/80 shadow-lg">
           <div class="flex flex-wrap justify-between items-center mb-6 gap-3 border-b border-gray-800/80 pb-4">
             <div>
-              <h3 id="selectedStationTitle" class="text-xl font-bold text-white font-orbitron">
+              <h3 id="selectedStationTitle" class="text-xl font-black text-white font-orbitron">
                 PS5 Console 1
               </h3>
-              <p id="selectedDateDisplay" class="text-xs text-cyber-cyan mt-1">
+              <p id="selectedDateDisplay" class="text-xs text-cyber-cyan font-bold mt-1">
                 তারিখ সিলেক্ট করা হয়নি
               </p>
             </div>
             
             <!-- Legend -->
-            <div class="flex items-center gap-4 text-xs font-semibold">
+            <div class="flex items-center gap-4 text-xs font-bold">
               <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-cyber-green"></span> <span data-i18n="legendAvailable">ফাঁকা</span></span>
               <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-cyber-cyan"></span> <span data-i18n="legendSelected">সিলেক্টেড</span></span>
               <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-cyber-red"></span> <span data-i18n="legendBooked">বুকড</span></span>
@@ -152,11 +176,11 @@
           <!-- Summary & Proceed Button -->
           <div class="bg-gray-900/90 p-4 rounded-xl border border-gray-800 flex flex-wrap justify-between items-center gap-4">
             <div>
-              <span class="text-xs text-gray-400 block" data-i18n="labelTotalSelect">মোট নির্বাচন:</span>
-              <span id="selectedSlotsCount" class="text-lg font-bold text-white">০ টি স্লট</span>
-              <span id="totalPrice" class="text-lg font-bold text-cyber-cyan ml-2">(৳ ০)</span>
+              <span class="text-xs text-gray-400 font-semibold block" data-i18n="labelTotalSelect">মোট নির্বাচন:</span>
+              <span id="selectedSlotsCount" class="text-lg font-black text-white">০ টি স্লট</span>
+              <span id="totalPrice" class="text-lg font-black text-cyber-cyan ml-2">(৳ ০)</span>
             </div>
-            <button id="checkoutBtn" onclick="openCheckoutModal()" disabled class="px-6 py-2.5 rounded-xl bg-cyber-accent hover:bg-purple-600 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-bold transition-all shadow-lg flex items-center gap-2">
+            <button id="checkoutBtn" onclick="openCheckoutModal()" disabled class="px-6 py-2.5 rounded-xl bg-cyber-accent hover:bg-purple-600 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-black transition-all shadow-lg flex items-center gap-2">
               <i class="fas fa-shopping-cart"></i> <span data-i18n="btnConfirmBooking">বুকিং কনফার্ম করুন</span>
             </button>
           </div>
@@ -168,31 +192,31 @@
 
     <!-- Admin Panel (Protected) -->
     <section id="adminSection" class="hidden space-y-6">
-      <div class="bg-cyber-card p-6 rounded-2xl border border-gray-800/80 shadow-lg">
+      <div class="glass-panel p-6 rounded-2xl border border-gray-800/80 shadow-lg">
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold text-white font-orbitron flex items-center gap-2">
+          <h2 class="text-2xl font-black text-white font-orbitron flex items-center gap-2">
             <i class="fas fa-user-shield text-cyber-accent"></i> <span data-i18n="adminHeader">বুকিং এডমিন ড্যাশবোর্ড</span>
           </h2>
           <div class="flex gap-2">
-            <button onclick="adminLogout()" class="px-3 py-1.5 rounded-lg bg-red-950/60 border border-red-800 text-red-300 hover:bg-red-900 text-xs font-bold transition">
+            <button onclick="adminLogout()" class="px-3.5 py-1.5 rounded-lg bg-red-950/60 border border-red-800 text-red-300 hover:bg-red-900 text-xs font-bold transition">
               <i class="fas fa-sign-out-alt"></i> <span data-i18n="adminLogout">লগআউট</span>
             </button>
-            <button onclick="closeAdminView()" class="px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs font-bold text-white">
+            <button onclick="closeAdminView()" class="px-3.5 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs font-bold text-white">
               <i class="fas fa-times"></i> <span data-i18n="adminClose">বন্ধ করুন</span>
             </button>
           </div>
         </div>
 
         <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
-          <input type="text" id="adminSearch" onkeyup="renderAdminTable()" placeholder="Search..." class="bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-sm text-white focus:outline-none w-full sm:w-64">
-          <button onclick="clearAllBookings()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold transition">
+          <input type="text" id="adminSearch" onkeyup="renderAdminTable()" placeholder="Search..." class="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2 text-sm text-white focus:outline-none w-full sm:w-64 font-medium">
+          <button onclick="clearAllBookings()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition shadow-lg">
             <i class="fas fa-trash-alt"></i> <span data-i18n="adminReset">সব বুকিং রিসেট করুন</span>
           </button>
         </div>
 
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm text-gray-300">
-            <thead class="bg-gray-900 text-gray-400 font-semibold uppercase text-xs">
+            <thead class="bg-gray-900/90 text-gray-400 font-bold uppercase text-xs">
               <tr>
                 <th class="p-3" data-i18n="thDate">তারিখ</th>
                 <th class="p-3" data-i18n="thName">গ্রাহকের নাম</th>
@@ -215,7 +239,7 @@
 
   <!-- Admin Login Modal -->
   <div id="adminLoginModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-cyber-card w-full max-w-sm rounded-2xl border border-gray-700/80 shadow-2xl p-6 relative">
+    <div class="glass-panel w-full max-w-sm rounded-2xl border border-gray-700/80 shadow-2xl p-6 relative">
       <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
         <i class="fas fa-times"></i>
       </button>
@@ -224,17 +248,17 @@
         <div class="w-12 h-12 bg-cyber-accent/20 text-cyber-accent rounded-full flex items-center justify-center mx-auto mb-2 text-2xl border border-cyber-accent/40 glow-accent">
           <i class="fas fa-lock"></i>
         </div>
-        <h3 class="text-lg font-bold text-white" data-i18n="adminLoginTitle">অ্যাডমিন পাসওয়ার্ড প্রদান করুন</h3>
-        <p class="text-xs text-gray-400 mt-1" data-i18n="adminLoginSub">ডাটা সুরক্ষার জন্য এডমিন প্রবেশাধিকার সংরক্ষিত</p>
+        <h3 class="text-lg font-extrabold text-white" data-i18n="adminLoginTitle">অ্যাডমিন পাসওয়ার্ড প্রদান করুন</h3>
+        <p class="text-xs text-gray-400 mt-1 font-medium" data-i18n="adminLoginSub">ডাটা সুরক্ষার জন্য এডমিন প্রবেশাধিকার সংরক্ষিত</p>
       </div>
 
       <form onsubmit="verifyAdminPassword(event)" class="space-y-4">
         <div>
-          <input type="password" id="adminPassInput" required placeholder="" class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyber-cyan text-center transition">
-          <p id="adminPassError" class="hidden text-xs text-red-400 mt-2 text-center" data-i18n="adminPassError">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
+          <input type="password" id="adminPassInput" required placeholder="" class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyber-cyan text-center font-bold transition">
+          <p id="adminPassError" class="hidden text-xs text-red-400 mt-2 text-center font-bold" data-i18n="adminPassError">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
         </div>
 
-        <button type="submit" class="w-full py-2.5 rounded-xl bg-cyber-accent hover:bg-purple-600 text-white font-bold text-sm transition shadow-lg" data-i18n="adminLoginBtn">
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-cyber-accent hover:bg-purple-600 text-white font-extrabold text-sm transition shadow-lg" data-i18n="adminLoginBtn">
           প্রবেশ করুন
         </button>
       </form>
@@ -243,79 +267,79 @@
 
   <!-- Checkout / Payment Modal -->
   <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-cyber-card w-full max-w-md rounded-2xl border border-gray-700/80 shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+    <div class="glass-panel w-full max-w-md rounded-2xl border border-gray-700/80 shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
       <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
         <i class="fas fa-times"></i>
       </button>
 
-      <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-800 pb-2 flex items-center gap-2">
+      <h3 class="text-xl font-black text-white mb-4 border-b border-gray-800 pb-2 flex items-center gap-2">
         <i class="fas fa-credit-card text-cyber-cyan"></i> <span data-i18n="checkoutTitle">বুকিং ও পেমেন্ট কনফার্মেশন</span>
       </h3>
 
-      <div class="bg-gray-900/90 p-4 rounded-xl mb-4 text-xs space-y-1 text-gray-300 border border-gray-800">
-        <p><strong data-i18n="modalStationLabel">স্টেশন:</strong> <span id="modalStation" class="text-cyber-cyan font-semibold"></span></p>
-        <p><strong data-i18n="modalDateLabel">তারিখ:</strong> <span id="modalDate" class="text-white"></span></p>
-        <p><strong data-i18n="modalSlotLabel">নির্বাচিত স্লট:</strong> <span id="modalSlots" class="text-cyber-pink font-semibold"></span></p>
-        <p class="text-sm font-bold text-white pt-1"><strong data-i18n="modalTotalLabel">মোট মূল্য:</strong> <span id="modalTotal" class="text-cyber-green text-base"></span></p>
+      <div class="bg-gray-900/90 p-4 rounded-xl mb-4 text-xs space-y-1.5 text-gray-300 border border-gray-800">
+        <p><strong data-i18n="modalStationLabel">স্টেশন:</strong> <span id="modalStation" class="text-cyber-cyan font-bold"></span></p>
+        <p><strong data-i18n="modalDateLabel">তারিখ:</strong> <span id="modalDate" class="text-white font-bold"></span></p>
+        <p><strong data-i18n="modalSlotLabel">নির্বাচিত স্লট:</strong> <span id="modalSlots" class="text-cyber-pink font-bold"></span></p>
+        <p class="text-sm font-bold text-white pt-1"><strong data-i18n="modalTotalLabel">মোট মূল্য:</strong> <span id="modalTotal" class="text-cyber-green text-base font-black"></span></p>
       </div>
 
       <form id="bookingForm" onsubmit="processBooking(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="labelCustName">আপনার নাম *</label>
-          <input type="text" id="custName" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyber-cyan">
+          <label class="block text-xs font-bold text-gray-300 mb-1" data-i18n="labelCustName">আপনার নাম *</label>
+          <input type="text" id="custName" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-cyber-cyan font-medium">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="labelCustPhone">মোবাইল নম্বর *</label>
-          <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyber-cyan">
+          <label class="block text-xs font-bold text-gray-300 mb-1" data-i18n="labelCustPhone">মোবাইল নম্বর *</label>
+          <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-cyber-cyan font-medium">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="labelPlayers">প্লেয়ার সংখ্যা</label>
-          <select id="custPlayers" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyber-cyan">
+          <label class="block text-xs font-bold text-gray-300 mb-1" data-i18n="labelPlayers">প্লেয়ার সংখ্যা</label>
+          <select id="custPlayers" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-cyber-cyan font-medium">
             <option value="1 Player" id="opt1Player">১ জন প্লেয়ার (১৫০ টাকা/ঘণ্টা)</option>
             <option value="2 Players" id="opt2Player">২ জন প্লেয়ার (১৫০ টাকা/ঘণ্টা)</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="labelPaymentMethod">পেমেন্ট মেথড সিলেক্ট করুন *</label>
+          <label class="block text-xs font-bold text-gray-300 mb-1" data-i18n="labelPaymentMethod">পেমেন্ট মেথড সিলেক্ট করুন *</label>
           <div class="grid grid-cols-3 gap-2">
-            <button type="button" onclick="selectPayment('bkash')" id="payBkash" class="pay-option border border-gray-700 rounded-lg p-2 text-center bg-gray-900 hover:border-cyber-pink transition">
-              <span class="block text-xs font-bold text-pink-500">bKash</span>
+            <button type="button" onclick="selectPayment('bkash')" id="payBkash" class="pay-option border border-gray-700 rounded-xl p-2.5 text-center bg-gray-900 hover:border-cyber-pink transition">
+              <span class="block text-xs font-extrabold text-pink-500">bKash</span>
             </button>
-            <button type="button" onclick="selectPayment('nagad')" id="payNagad" class="pay-option border border-gray-700 rounded-lg p-2 text-center bg-gray-900 hover:border-orange-500 transition">
-              <span class="block text-xs font-bold text-orange-500">Nagad</span>
+            <button type="button" onclick="selectPayment('nagad')" id="payNagad" class="pay-option border border-gray-700 rounded-xl p-2.5 text-center bg-gray-900 hover:border-orange-500 transition">
+              <span class="block text-xs font-extrabold text-orange-500">Nagad</span>
             </button>
-            <button type="button" onclick="selectPayment('cash')" id="payCash" class="pay-option border border-gray-700 rounded-lg p-2 text-center bg-gray-900 hover:border-cyber-green transition">
-              <span class="block text-xs font-bold text-green-400">Cash</span>
+            <button type="button" onclick="selectPayment('cash')" id="payCash" class="pay-option border border-gray-700 rounded-xl p-2.5 text-center bg-gray-900 hover:border-cyber-green transition">
+              <span class="block text-xs font-extrabold text-green-400">Cash</span>
             </button>
           </div>
         </div>
 
-        <div id="merchantInfoBox" class="hidden bg-purple-950/40 border border-purple-800 p-3 rounded-lg text-xs space-y-2">
-          <p class="text-purple-200" id="merchantNotice">
+        <div id="merchantInfoBox" class="hidden bg-purple-950/40 border border-purple-800 p-3.5 rounded-xl text-xs space-y-2">
+          <p class="text-purple-200 font-medium" id="merchantNotice">
             নিচের নম্বরে <strong>Send Money / Cash-In</strong> করে ট্রানজেকশন আইডিটি প্রদান করুন:
           </p>
-          <div class="flex items-center justify-between bg-gray-900 p-2 rounded border border-purple-900">
+          <div class="flex items-center justify-between bg-gray-900 p-2.5 rounded-lg border border-purple-900">
             <span class="font-bold text-white font-orbitron">+880 1953013236</span>
-            <button type="button" onclick="copyMerchantNumber('+8801953013236')" class="text-cyber-cyan hover:underline text-xs flex items-center gap-1">
+            <button type="button" onclick="copyMerchantNumber('+8801953013236')" class="text-cyber-cyan hover:underline text-xs font-bold flex items-center gap-1">
               <i class="far fa-copy"></i> <span data-i18n="copyBtn">কপি করুন</span>
             </button>
           </div>
         </div>
 
         <div id="trxIdBox" class="hidden">
-          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="labelTrxInput">
+          <label class="block text-xs font-bold text-gray-300 mb-1" data-i18n="labelTrxInput">
             বিকাশ / নগদ ট্রানজেকশন আইডি (TrxID) *
           </label>
-          <input type="text" id="custTrxId" placeholder="e.g. 9B7A2X8K" oninput="validateTrxIdInput()" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white uppercase focus:outline-none focus:border-cyber-cyan">
-          <div id="trxStatusMsg" class="mt-1 text-xs text-red-400 flex items-center gap-1">
+          <input type="text" id="custTrxId" placeholder="e.g. 9B7A2X8K" oninput="validateTrxIdInput()" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3.5 py-2 text-sm text-white uppercase focus:outline-none focus:border-cyber-cyan font-bold">
+          <div id="trxStatusMsg" class="mt-1 text-xs text-red-400 flex items-center gap-1 font-bold">
             <i class="fas fa-exclamation-circle"></i> <span data-i18n="trxRequiredMsg">ট্রানজেকশন আইডি প্রদান করা বাধ্যতামূলক।</span>
           </div>
         </div>
 
-        <button type="submit" id="submitBookingBtn" class="w-full py-3 rounded-lg bg-cyber-green hover:bg-emerald-600 text-white font-bold text-sm transition shadow-lg" data-i18n="submitBooking">
+        <button type="submit" id="submitBookingBtn" class="w-full py-3 rounded-xl bg-cyber-green hover:bg-emerald-600 text-white font-black text-sm transition shadow-lg" data-i18n="submitBooking">
           বুকিং সম্পন্ন করুন
         </button>
       </form>
@@ -325,29 +349,30 @@
 
   <!-- Receipt Ticket Modal -->
   <div id="receiptModal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-cyber-card border border-cyber-cyan/50 max-w-sm w-full rounded-2xl p-6 text-center shadow-2xl relative glow-cyan">
+    <div class="glass-panel border border-cyber-cyan/50 max-w-sm w-full rounded-2xl p-6 text-center shadow-2xl relative glow-cyan">
       <div class="w-12 h-12 bg-cyber-green/20 text-cyber-green rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
         <i class="fas fa-check-circle"></i>
       </div>
-      <h3 class="text-xl font-extrabold text-white font-orbitron" data-i18n="receiptHeader">বুকিং সফল হয়েছে!</h3>
-      <p class="text-xs text-gray-400 mb-4" data-i18n="receiptSub">The Game Room-এ আসার সময় এই রসিদটি দেখাবেন।</p>
+      <h3 class="text-xl font-black text-white font-orbitron" data-i18n="receiptHeader">বুকিং সফল হয়েছে!</h3>
+      <p class="text-xs text-gray-400 mb-4 font-medium" data-i18n="receiptSub">The Game Room-এ আসার সময় এই রসিদটি দেখাবেন।</p>
 
-      <div id="receiptDetails" class="bg-gray-900 text-left p-4 rounded-lg text-xs space-y-2 mb-4 text-gray-300 border border-gray-800">
+      <div id="receiptDetails" class="bg-gray-900 text-left p-4 rounded-xl text-xs space-y-2 mb-4 text-gray-300 border border-gray-800 font-medium">
       </div>
 
-      <button onclick="closeReceiptModal()" class="w-full py-2 bg-cyber-cyan hover:bg-cyan-600 text-gray-950 font-bold rounded-lg transition text-sm" data-i18n="receiptOk">
+      <button onclick="closeReceiptModal()" class="w-full py-2.5 bg-cyber-cyan hover:bg-cyan-600 text-gray-950 font-black rounded-xl transition text-sm shadow-lg" data-i18n="receiptOk">
         ঠিক আছে
       </button>
     </div>
   </div>
 
-  <footer class="border-t border-gray-800 bg-cyber-card/40 py-6 mt-12 text-center text-xs text-gray-500">
+  <!-- Footer -->
+  <footer class="border-t border-gray-800/80 glass-panel py-6 mt-12 text-center text-xs text-gray-500 font-medium">
     <p>© 2026 The Game Room. All Rights Reserved.</p>
     <p class="mt-1" data-i18n="footerAddress">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236</p>
   </footer>
 
   <script>
-    let currentLang = 'BN'; // Default Language
+    let currentLang = 'BN';
 
     const translations = {
       BN: {
@@ -355,7 +380,7 @@
         adminBtn: "অ্যাডমিন প্যানেল",
         heroBadge: "⚡ প্রিমিয়াম গেমিং এক্সপেরিয়েন্স",
         heroTitle: "আপনার পছন্দমতো স্লট বুক করুন",
-        heroDesc: 'সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।',
+        heroDesc: 'সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।',
         labelDate: "বুকিংয়ের তারিখ সিলেক্ট করুন:",
         labelStation: "গেমিং স্টেশন নির্বাচন করুন:",
         legendAvailable: "ফাঁকা",
@@ -416,7 +441,7 @@
         adminBtn: "Admin Panel",
         heroBadge: "⚡ Premium Gaming Experience",
         heroTitle: "Book Your Slot Today",
-        heroDesc: 'Flat Rate from 10:00 AM to 10:00 PM <strong class="text-cyber-cyan">150 BDT / Hour</strong> (1 or 2 Players).',
+        heroDesc: 'Flat Rate from 10:00 AM to 10:00 PM <strong class="text-cyber-cyan font-bold">150 BDT / Hour</strong> (1 or 2 Players).',
         labelDate: "Select Booking Date:",
         labelStation: "Select Gaming Station:",
         legendAvailable: "Available",
@@ -524,9 +549,20 @@
       renderSlotsGrid();
     };
 
-    function toggleLanguage() {
-      currentLang = currentLang === 'BN' ? 'EN' : 'BN';
-      document.getElementById('langBtnLabel').innerText = currentLang === 'BN' ? 'ENG' : 'বাংলা';
+    function setLanguage(lang) {
+      currentLang = lang;
+      
+      const btnBN = document.getElementById('btnLangBN');
+      const btnEN = document.getElementById('btnLangEN');
+
+      if (lang === 'BN') {
+        btnBN.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-cyber-cyan text-gray-950 shadow";
+        btnEN.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all text-gray-400 hover:text-white";
+      } else {
+        btnEN.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-cyber-cyan text-gray-950 shadow";
+        btnBN.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all text-gray-400 hover:text-white";
+      }
+
       applyLanguage();
       renderStationList();
       updateSelectedDateDisplay();
@@ -562,10 +598,10 @@
       const container = document.getElementById('stationList');
       if (!container) return;
       container.innerHTML = STATIONS.map(st => `
-        <div onclick="selectStation('${st.id}')" class="p-3.5 rounded-xl border ${st.id === currentStation.id ? 'border-cyber-cyan bg-cyan-950/20 glow-cyan' : 'border-gray-800 bg-gray-900'} hover:border-gray-600 cursor-pointer transition-all flex justify-between items-center">
+        <div onclick="selectStation('${st.id}')" class="p-3.5 rounded-xl border ${st.id === currentStation.id ? 'border-cyber-cyan bg-cyan-950/20 glow-cyan' : 'border-gray-800 bg-gray-900/80'} hover:border-gray-600 cursor-pointer transition-all flex justify-between items-center">
           <div>
             <h4 class="font-bold text-sm text-white">${st.name}</h4>
-            <p class="text-xs text-gray-400 mt-0.5">${st.desc}</p>
+            <p class="text-xs text-gray-400 mt-0.5 font-medium">${st.desc}</p>
           </div>
           <span class="text-xs font-bold text-cyber-cyan bg-cyan-950/40 px-2.5 py-1 rounded-md border border-cyan-900">৳${st.price}/${currentLang === 'BN' ? 'ঘণ্টা' : 'Hr'}</span>
         </div>
@@ -691,12 +727,12 @@
       const t = translations[currentLang];
 
       if (trxVal.length >= 8) {
-        statusMsg.className = "mt-1 text-xs text-green-400 flex items-center gap-1";
+        statusMsg.className = "mt-1 text-xs text-green-400 flex items-center gap-1 font-bold";
         statusMsg.innerHTML = `<i class="fas fa-check-circle"></i> ${t.trxVerifiedMsg}`;
         submitBtn.disabled = false;
         return true;
       } else {
-        statusMsg.className = "mt-1 text-xs text-red-400 flex items-center gap-1";
+        statusMsg.className = "mt-1 text-xs text-red-400 flex items-center gap-1 font-bold";
         statusMsg.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${t.trxMinMsg}`;
         submitBtn.disabled = true;
         return false;
@@ -753,7 +789,7 @@
       const details = document.getElementById('receiptDetails');
       const isBn = currentLang === 'BN';
       details.innerHTML = `
-        <p><strong>${isBn ? 'বুকিং আইডি' : 'Booking ID'}:</strong> <span class="text-cyber-cyan">${booking.id}</span></p>
+        <p><strong>${isBn ? 'বুকিং আইডি' : 'Booking ID'}:</strong> <span class="text-cyber-cyan font-bold">${booking.id}</span></p>
         <p><strong>${isBn ? 'নাম' : 'Name'}:</strong> ${booking.customerName}</p>
         <p><strong>${isBn ? 'মোবাইল' : 'Phone'}:</strong> ${booking.customerPhone}</p>
         <p><strong>${isBn ? 'স্টেশন' : 'Station'}:</strong> ${booking.stationName}</p>
@@ -826,29 +862,29 @@
       );
 
       if (filtered.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="8" class="text-center p-4 text-gray-500">${currentLang === 'BN' ? 'কোনো বুকিং পাওয়া যায়নি।' : 'No bookings found.'}</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="8" class="text-center p-4 text-gray-500 font-bold">${currentLang === 'BN' ? 'কোনো বুকিং পাওয়া যায়নি।' : 'No bookings found.'}</td></tr>`;
         return;
       }
 
       tableBody.innerHTML = filtered.map(b => {
         let slotsFormatted = '';
         if (Array.isArray(b.slots) && b.slots.length > 0) {
-          slotsFormatted = b.slots.map(s => `<span class="inline-block bg-purple-950/80 border border-purple-800 text-purple-300 px-2 py-0.5 rounded text-[11px] mr-1 my-0.5 font-semibold">${s}</span>`).join('');
+          slotsFormatted = b.slots.map(s => `<span class="inline-block bg-purple-950/80 border border-purple-800 text-purple-300 px-2 py-0.5 rounded text-[11px] mr-1 my-0.5 font-bold">${s}</span>`).join('');
         } else if (typeof b.slots === 'string') {
-          slotsFormatted = `<span class="inline-block bg-purple-950/80 border border-purple-800 text-purple-300 px-2 py-0.5 rounded text-[11px] font-semibold">${b.slots}</span>`;
+          slotsFormatted = `<span class="inline-block bg-purple-950/80 border border-purple-800 text-purple-300 px-2 py-0.5 rounded text-[11px] font-bold">${b.slots}</span>`;
         } else {
-          slotsFormatted = `<span class="text-gray-400">Booked</span>`;
+          slotsFormatted = `<span class="text-gray-400 font-bold">Booked</span>`;
         }
 
         return `
           <tr class="hover:bg-gray-800/50">
-            <td class="p-3 text-xs">${b.date || 'N/A'}</td>
-            <td class="p-3 font-semibold text-white">${b.customerName || 'N/A'}</td>
-            <td class="p-3 text-xs">${b.customerPhone || 'N/A'}</td>
-            <td class="p-3 text-xs text-cyber-cyan">${b.stationName || 'N/A'}</td>
+            <td class="p-3 text-xs font-semibold">${b.date || 'N/A'}</td>
+            <td class="p-3 font-bold text-white">${b.customerName || 'N/A'}</td>
+            <td class="p-3 text-xs font-semibold">${b.customerPhone || 'N/A'}</td>
+            <td class="p-3 text-xs font-bold text-cyber-cyan">${b.stationName || 'N/A'}</td>
             <td class="p-3 text-xs">${slotsFormatted}</td>
-            <td class="p-3 text-xs font-bold ${b.paymentMethod === 'CASH' ? 'text-green-400' : 'text-pink-400'}">${b.paymentMethod || 'N/A'}</td>
-            <td class="p-3 text-xs font-orbitron text-yellow-400">${b.trxId || 'N/A'}</td>
+            <td class="p-3 text-xs font-black ${b.paymentMethod === 'CASH' ? 'text-green-400' : 'text-pink-400'}">${b.paymentMethod || 'N/A'}</td>
+            <td class="p-3 text-xs font-orbitron font-bold text-yellow-400">${b.trxId || 'N/A'}</td>
             <td class="p-3">
               <button onclick="cancelBooking('${b.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold">
                 <i class="fas fa-trash"></i> ${currentLang === 'BN' ? 'বাতিল' : 'Cancel'}
