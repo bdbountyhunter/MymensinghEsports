@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Game Room - Ultimate Gaming Experience</title>
+  <title>The Game Room - Ultimate Gaming Lounge</title>
   
   <!-- Tailwind CSS & FontAwesome CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -16,13 +16,13 @@
         extend: {
           colors: {
             cyber: {
-              black: '#030308',
-              card: '#0a0b16',
-              accent: '#8b5cf6',
-              cyan: '#06b6d4',
-              pink: '#ec4899',
-              green: '#10b981',
-              red: '#ef4444'
+              black: '#05050f',
+              card: '#0c0d1d',
+              accent: '#7c3aed',
+              cyan: '#00f2fe',
+              pink: '#ff007f',
+              green: '#00e676',
+              red: '#ff1744'
             }
           }
         }
@@ -34,19 +34,22 @@
     @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Orbitron:wght@600;800;900&display=swap');
     body { 
       font-family: 'Hind Siliguri', sans-serif; 
-      background-color: #030308; 
+      background-color: #05050f; 
       color: #f3f4f6;
+      /* Premium Midnight Amethyst & Cyberpunk Gradient Mesh */
       background-image: 
-        linear-gradient(to bottom, rgba(3, 3, 8, 0.92), rgba(10, 11, 22, 0.96)),
-        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920&auto=format&fit=crop');
+        radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(0, 242, 254, 0.1) 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(5, 5, 15, 0.92), rgba(12, 13, 29, 0.98)),
+        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1920&auto=format&fit=crop');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
     .font-orbitron { font-family: 'Orbitron', sans-serif; }
-    .glow-cyan { box-shadow: 0 0 25px rgba(6, 182, 212, 0.3); }
-    .glow-accent { box-shadow: 0 0 30px rgba(139, 92, 246, 0.35); }
-    .glass-panel { background: rgba(10, 11, 22, 0.88); backdrop-filter: blur(16px); border: 1px solid rgba(139, 92, 246, 0.2); }
+    .glow-cyan { box-shadow: 0 0 30px rgba(0, 242, 254, 0.25); }
+    .glow-accent { box-shadow: 0 0 35px rgba(124, 58, 237, 0.3); }
+    .glass-panel { background: rgba(12, 13, 29, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(124, 58, 237, 0.3); }
 
     @media print {
       body * { visibility: hidden; }
@@ -58,16 +61,16 @@
 </head>
 <body class="min-h-screen text-gray-100 flex flex-col justify-between selection:bg-cyber-cyan selection:text-black">
 
-  <!-- Live Activity Ticker (Human/Real Business Touch) -->
-  <div class="bg-gradient-to-r from-purple-950 via-cyber-card to-cyan-950 border-b border-purple-900/50 py-1.5 px-4 text-xs flex items-center justify-between overflow-hidden">
+  <!-- Opening / Coming Soon Announcement Ticker -->
+  <div class="bg-gradient-to-r from-purple-950 via-cyber-card to-cyan-950 border-b border-purple-900/50 py-2 px-4 text-xs flex items-center justify-between overflow-hidden shadow-md">
     <div class="flex items-center gap-2 max-w-7xl mx-auto w-full">
-      <span class="flex h-2 w-2 relative">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-green opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-cyber-green"></span>
+      <span class="flex h-2.5 w-2.5 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-pink opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyber-pink"></span>
       </span>
-      <span class="font-bold text-cyber-cyan font-orbitron uppercase text-[10px] tracking-wider">LIVE ACTIVITY:</span>
-      <marquee class="text-gray-300 font-medium text-xs">
-        <span id="tickerText">শাহরিয়ার শুভ ১০ মিনিট আগে PS5 Console 1 বুক করেছেন • সাব্বির হোসেন ৩ ঘণ্টা পর Racing Simulator টেস্ট করবেন • প্রতিদিন সকাল ১০টা থেকে রাত ১০টা পর্যন্ত আমাদের স্পেশাল গেমিং আড্ডা চলছে!</span>
+      <span class="font-bold text-cyber-pink font-orbitron uppercase text-[10px] tracking-wider" id="announcementTag">ANNOUNCEMENT:</span>
+      <marquee class="text-gray-200 font-bold text-xs" id="marqueeText">
+        🚀 কামিং সুন! দ্য গেম রুম খুব শীঘ্রই আপনার শহরে অফিশিয়ালি ওপেন হতে যাচ্ছে। স্লট বুকিংয়ের জন্য তৈরি থাকুন!
       </marquee>
     </div>
   </div>
@@ -98,6 +101,10 @@
             <span class="bg-cyan-950/70 border border-cyan-800/80 text-cyan-200 px-2.5 py-0.5 rounded-full font-bold font-orbitron flex items-center gap-1.5">
               <i class="fas fa-phone-alt text-cyber-cyan"></i> <span id="headerPhone">+880 1953013236</span>
             </span>
+            <!-- WhatsApp Direct Button in Header -->
+            <a href="https://wa.me/8801953013236?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room%20slots!" target="_blank" class="bg-emerald-950/80 border border-emerald-700/80 text-emerald-300 hover:bg-emerald-900 px-2.5 py-0.5 rounded-full font-bold transition flex items-center gap-1.5 shadow">
+              <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span data-i18n="whatsappHeader">WhatsApp যোগাযোগ</span>
+            </a>
           </div>
         </div>
       </div>
@@ -126,10 +133,10 @@
     <section class="rounded-2xl bg-gradient-to-r from-purple-900/50 via-cyber-card to-cyan-900/50 p-6 md:p-8 border border-purple-500/30 shadow-2xl relative overflow-hidden glow-accent glass-panel">
       <div class="max-w-2xl relative z-10">
         <span class="inline-block px-3 py-1 bg-cyber-accent/20 text-cyber-accent text-xs font-extrabold rounded-full mb-3 border border-cyber-accent/40" data-i18n="heroBadge">
-          ⚡ প্রিমিয়াম গেমিং এক্সপেরিয়েন্স
+          ⚡ প্রিমিয়াম গেমিং লাউঞ্জ ও ই-স্পোর্টস হাব
         </span>
         <h2 class="text-3xl md:text-4xl font-black text-white mb-2 font-orbitron tracking-tight" data-i18n="heroTitle">
-          আপনার পছন্দমতো স্লট বুক করুন
+          আপনার গেমিং স্লট বুক করুন
         </h2>
         <p class="text-gray-300 text-sm md:text-base font-medium" id="heroDesc">
           সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold" id="heroRate">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।
@@ -196,100 +203,67 @@
 
     </section>
 
-    <!-- Popular Games Collection Showcase -->
+    <!-- Latest Popular Games 2026 Showcase -->
     <section class="glass-panel p-6 rounded-2xl shadow-xl">
       <div class="flex justify-between items-center mb-6">
         <div>
           <h3 class="text-xl font-extrabold text-white font-orbitron flex items-center gap-2">
-            <i class="fas fa-trophy text-cyber-cyan"></i> <span data-i18n="gamesTitle">পপুলার গেমস কালেকশন</span>
+            <i class="fas fa-fire text-cyber-pink"></i> <span data-i18n="gamesTitle">লেটেস্ট পপুলার গেম কালেকশন</span>
           </h3>
-          <p class="text-xs text-gray-400 mt-1" data-i18n="gamesSub">আমাদের লাউঞ্জে প্রতিনিয়ত আপডেট হওয়া টপ রেটেড গেমসমূহ:</p>
+          <p class="text-xs text-gray-400 mt-1" data-i18n="gamesSub">আমাদের লাউঞ্জে উপলব্ধ হাই-এন্ড ও লেটেস্ট ট্রেন্ডিং গেমসমূহ:</p>
         </div>
-        <span class="text-xs bg-purple-950 border border-purple-800 text-purple-300 font-bold px-3 py-1 rounded-full" data-i18n="gamesBadge">4K @ 60/120 FPS</span>
+        <span class="text-xs bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold px-3 py-1 rounded-full" data-i18n="gamesBadge">Next-Gen Graphics</span>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        <!-- GTA V -->
+        <!-- GTA VI -->
         <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
-          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="GTA V">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="GTA VI">
           <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
           <div class="absolute bottom-2 left-2 right-2">
-            <span class="text-[10px] font-bold bg-pink-600 text-white px-1.5 py-0.5 rounded">Action/Open World</span>
-            <h4 class="font-bold text-white text-sm mt-1">GTA V Premium</h4>
+            <span class="text-[10px] font-bold bg-pink-600 text-white px-1.5 py-0.5 rounded">Blockbuster</span>
+            <h4 class="font-bold text-white text-sm mt-1">GTA VI Ready</h4>
           </div>
         </div>
 
-        <!-- EA FC 24 -->
+        <!-- EA FC 26 -->
         <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
-          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="FC 24">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=500&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="FC 26">
           <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
           <div class="absolute bottom-2 left-2 right-2">
-            <span class="text-[10px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded">Sports / Football</span>
-            <h4 class="font-bold text-white text-sm mt-1">EA Sports FC 24</h4>
+            <span class="text-[10px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded">Sports</span>
+            <h4 class="font-bold text-white text-sm mt-1">EA Sports FC 26</h4>
           </div>
         </div>
 
-        <!-- Forza Horizon 5 -->
+        <!-- Forza Motorsport -->
         <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
-          <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Forza">
+          <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=500&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Forza">
           <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
           <div class="absolute bottom-2 left-2 right-2">
-            <span class="text-[10px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded">Full Racing Sim</span>
-            <h4 class="font-bold text-white text-sm mt-1">Forza Horizon 5</h4>
+            <span class="text-[10px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded">Racing Sim</span>
+            <h4 class="font-bold text-white text-sm mt-1">Forza Motorsport</h4>
           </div>
         </div>
 
         <!-- Tekken 8 -->
         <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
-          <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Tekken 8">
+          <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=500&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Tekken 8">
           <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
           <div class="absolute bottom-2 left-2 right-2">
-            <span class="text-[10px] font-bold bg-purple-600 text-white px-1.5 py-0.5 rounded">Versus Fighting</span>
-            <h4 class="font-bold text-white text-sm mt-1">Tekken 8</h4>
+            <span class="text-[10px] font-bold bg-purple-600 text-white px-1.5 py-0.5 rounded">Fighting</span>
+            <h4 class="font-bold text-white text-sm mt-1">Tekken 8 Pro</h4>
           </div>
         </div>
 
-        <!-- Call of Duty -->
+        <!-- Cyberpunk 2077 -->
         <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
-          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Warzone">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Cyberpunk">
           <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
           <div class="absolute bottom-2 left-2 right-2">
-            <span class="text-[10px] font-bold bg-red-600 text-white px-1.5 py-0.5 rounded">FPS / Shooter</span>
-            <h4 class="font-bold text-white text-sm mt-1">COD Warzone</h4>
+            <span class="text-[10px] font-bold bg-red-600 text-white px-1.5 py-0.5 rounded">Action RPG</span>
+            <h4 class="font-bold text-white text-sm mt-1">Cyberpunk 2077</h4>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gaming Hardware Showcase -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass-panel p-5 rounded-2xl flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-cyber-pink/20 text-cyber-pink flex items-center justify-center text-2xl border border-cyber-pink/40">
-          <i class="fas fa-tv"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-white text-sm">4K HDR OLED Displays</h4>
-          <p class="text-xs text-gray-400 mt-0.5">অসম্ভব নিখুঁত রেজুলেশন ও ১২০Hz রিফ্রেশ রেট</p>
-        </div>
-      </div>
-
-      <div class="glass-panel p-5 rounded-2xl flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-cyber-cyan/20 text-cyber-cyan flex items-center justify-center text-2xl border border-cyber-cyan/40">
-          <i class="fas fa-couch"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-white text-sm">Full AC & Gaming Lounge</h4>
-          <p class="text-xs text-gray-400 mt-0.5">সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আড্ডামুখর গেমিং পরিবেশ</p>
-        </div>
-      </div>
-
-      <div class="glass-panel p-5 rounded-2xl flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-cyber-green/20 text-cyber-green flex items-center justify-center text-2xl border border-cyber-green/40">
-          <i class="fas fa-wifi"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-white text-sm">High-Speed Fiber Network</h4>
-          <p class="text-xs text-gray-400 mt-0.5">মাল্টিপ্লেয়ার গেমসে জিরো পিং / লেগ-ফ্রি এক্সপেরিয়েন্স</p>
         </div>
       </div>
     </section>
@@ -527,9 +501,14 @@
   </div>
 
   <!-- Footer -->
-  <footer class="border-t border-purple-900/40 glass-panel py-6 mt-12 text-center text-xs text-gray-400 font-medium">
+  <footer class="border-t border-purple-900/40 glass-panel py-6 mt-12 text-center text-xs text-gray-400 font-medium space-y-2">
     <p>© 2026 The Game Room. All Rights Reserved.</p>
-    <p class="mt-1" data-i18n="footerAddress">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236</p>
+    <p data-i18n="footerAddress">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236</p>
+    <div class="flex justify-center items-center gap-2 pt-1">
+      <a href="https://wa.me/8801953013236?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room%20slots!" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-700/80 text-emerald-300 hover:bg-emerald-900 font-bold transition text-[11px]">
+        <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span data-i18n="whatsappFooter">WhatsApp-এ চ্যাট করুন</span>
+      </a>
+    </div>
   </footer>
 
   <script>
@@ -539,9 +518,13 @@
       BN: {
         address: "কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ",
         phoneNum: "+৮৮০ ১৯৫৩০ ১৩২৩৬",
+        whatsappHeader: "WhatsApp যোগাযোগ",
+        whatsappFooter: "WhatsApp-এ চ্যাট করুন",
+        announcementTag: "ঘোষণা:",
+        marqueeText: "🚀 কামিং সুন! দ্য গেম রুম খুব শীঘ্রই আপনার শহরে অফিশিয়ালি ওপেন হতে যাচ্ছে। স্লট বুকিংয়ের জন্য তৈরি থাকুন!",
         adminBtn: "অ্যাডমিন প্যানেল",
-        heroBadge: "⚡ প্রিমিয়াম গেমিং এক্সপেরিয়েন্স",
-        heroTitle: "আপনার পছন্দমতো স্লট বুক করুন",
+        heroBadge: "⚡ প্রিমিয়াম গেমিং লাউঞ্জ ও ই-স্পোর্টস হাব",
+        heroTitle: "আপনার গেমিং স্লট বুক করুন",
         heroRateText: "১৫০ টাকা / ঘণ্টা",
         labelDate: "বুকিংয়ের তারিখ সিলেক্ট করুন:",
         labelStation: "গেমিং স্টেশন নির্বাচন করুন:",
@@ -550,9 +533,9 @@
         legendBooked: "বুকড",
         labelTotalSelect: "মোট নির্বাচন:",
         btnConfirmBooking: "বুকিং কনফার্ম করুন",
-        gamesTitle: "পপুলার গেমস কালেকশন",
-        gamesSub: "আমাদের লাউঞ্জে প্রতিনিয়ত আপডেট হওয়া টপ রেটেড গেমসমূহ:",
-        gamesBadge: "4K @ 60/120 FPS",
+        gamesTitle: "লেটেস্ট পপুলার গেম কালেকশন",
+        gamesSub: "আমাদের লাউঞ্জে উপলব্ধ হাই-এন্ড ও লেটেস্ট ট্রেন্ডিং গেমসমূহ:",
+        gamesBadge: "Next-Gen Graphics",
         adminHeader: "বুকিং ও সেলস ড্যাশবোর্ড",
         adminLogout: "লগআউট",
         adminClose: "বন্ধ করুন",
@@ -607,9 +590,13 @@
       EN: {
         address: "Kulsum Market 2nd Floor, Maskanda, Mymensingh",
         phoneNum: "+880 1953013236",
+        whatsappHeader: "WhatsApp Contact",
+        whatsappFooter: "Chat on WhatsApp",
+        announcementTag: "ANNOUNCEMENT:",
+        marqueeText: "🚀 Coming Soon! The Game Room is officially opening very soon in your city. Get ready to book your slots!",
         adminBtn: "Admin Panel",
-        heroBadge: "⚡ Premium Gaming Experience",
-        heroTitle: "Book Your Slot Today",
+        heroBadge: "⚡ Premium Gaming Lounge & Esports Hub",
+        heroTitle: "Book Your Gaming Slot",
         heroRateText: "150 BDT / Hour",
         labelDate: "Select Booking Date:",
         labelStation: "Select Gaming Station:",
@@ -618,9 +605,9 @@
         legendBooked: "Booked",
         labelTotalSelect: "Total Selected:",
         btnConfirmBooking: "Confirm Booking",
-        gamesTitle: "Popular Games Collection",
-        gamesSub: "Top-rated titles continuously updated at our lounge:",
-        gamesBadge: "4K @ 60/120 FPS",
+        gamesTitle: "Latest Popular Games Collection",
+        gamesSub: "High-end and latest trending titles available at our lounge:",
+        gamesBadge: "Next-Gen Graphics",
         adminHeader: "Sales & Booking Dashboard",
         adminLogout: "Logout",
         adminClose: "Close",
@@ -696,7 +683,6 @@
       "09:00 PM - 10:00 PM"
     ];
 
-    // Admin Password: zerotohero
     const ADMIN_PASSWORD = "zerotohero";
 
     let currentStation = STATIONS[0];
@@ -757,6 +743,9 @@
 
       document.getElementById('headerPhone').innerText = t.phoneNum;
       document.getElementById('modalMerchantNum').innerText = t.phoneNum;
+      document.getElementById('announcementTag').innerText = t.announcementTag;
+      document.getElementById('marqueeText').innerText = t.marqueeText;
+
       document.getElementById('heroDesc').innerHTML = (currentLang === 'BN') 
         ? `সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold">${t.heroRateText}</strong> (১ জন বা ২ জন প্লেয়ার)।`
         : `Flat Rate from 10:00 AM to 10:00 PM <strong class="text-cyber-cyan font-bold">${t.heroRateText}</strong> (1 or 2 Players).`;
