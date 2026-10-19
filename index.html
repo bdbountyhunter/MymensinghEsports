@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Game Room - Slot Booking</title>
+  <title>The Game Room - Ultimate Gaming Experience</title>
   
   <!-- Tailwind CSS & FontAwesome CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -31,13 +31,13 @@
   </script>
   
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Orbitron:wght@600;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Orbitron:wght@600;800;900&display=swap');
     body { 
       font-family: 'Hind Siliguri', sans-serif; 
       background-color: #030308; 
       color: #f3f4f6;
       background-image: 
-        linear-gradient(to bottom, rgba(3, 3, 8, 0.88), rgba(10, 11, 22, 0.95)),
+        linear-gradient(to bottom, rgba(3, 3, 8, 0.92), rgba(10, 11, 22, 0.96)),
         url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920&auto=format&fit=crop');
       background-size: cover;
       background-position: center;
@@ -46,7 +46,7 @@
     .font-orbitron { font-family: 'Orbitron', sans-serif; }
     .glow-cyan { box-shadow: 0 0 25px rgba(6, 182, 212, 0.3); }
     .glow-accent { box-shadow: 0 0 30px rgba(139, 92, 246, 0.35); }
-    .glass-panel { background: rgba(10, 11, 22, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(139, 92, 246, 0.2); }
+    .glass-panel { background: rgba(10, 11, 22, 0.88); backdrop-filter: blur(16px); border: 1px solid rgba(139, 92, 246, 0.2); }
 
     @media print {
       body * { visibility: hidden; }
@@ -57,6 +57,20 @@
   </style>
 </head>
 <body class="min-h-screen text-gray-100 flex flex-col justify-between selection:bg-cyber-cyan selection:text-black">
+
+  <!-- Live Activity Ticker (Human/Real Business Touch) -->
+  <div class="bg-gradient-to-r from-purple-950 via-cyber-card to-cyan-950 border-b border-purple-900/50 py-1.5 px-4 text-xs flex items-center justify-between overflow-hidden">
+    <div class="flex items-center gap-2 max-w-7xl mx-auto w-full">
+      <span class="flex h-2 w-2 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-green opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-cyber-green"></span>
+      </span>
+      <span class="font-bold text-cyber-cyan font-orbitron uppercase text-[10px] tracking-wider">LIVE ACTIVITY:</span>
+      <marquee class="text-gray-300 font-medium text-xs">
+        <span id="tickerText">শাহরিয়ার শুভ ১০ মিনিট আগে PS5 Console 1 বুক করেছেন • সাব্বির হোসেন ৩ ঘণ্টা পর Racing Simulator টেস্ট করবেন • প্রতিদিন সকাল ১০টা থেকে রাত ১০টা পর্যন্ত আমাদের স্পেশাল গেমিং আড্ডা চলছে!</span>
+      </marquee>
+    </div>
+  </div>
 
   <!-- Toast Notification -->
   <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-all duration-300 glass-panel border-l-4 border-cyber-cyan p-4 rounded-xl shadow-2xl text-white flex items-center gap-3">
@@ -106,10 +120,10 @@
   </header>
 
   <!-- Main Container -->
-  <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
+  <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow space-y-12">
     
     <!-- Hero Banner -->
-    <section class="mb-8 rounded-2xl bg-gradient-to-r from-purple-900/50 via-cyber-card to-cyan-900/50 p-6 md:p-8 border border-purple-500/30 shadow-2xl relative overflow-hidden glow-accent glass-panel">
+    <section class="rounded-2xl bg-gradient-to-r from-purple-900/50 via-cyber-card to-cyan-900/50 p-6 md:p-8 border border-purple-500/30 shadow-2xl relative overflow-hidden glow-accent glass-panel">
       <div class="max-w-2xl relative z-10">
         <span class="inline-block px-3 py-1 bg-cyber-accent/20 text-cyber-accent text-xs font-extrabold rounded-full mb-3 border border-cyber-accent/40" data-i18n="heroBadge">
           ⚡ প্রিমিয়াম গেমিং এক্সপেরিয়েন্স
@@ -180,6 +194,104 @@
         </div>
       </div>
 
+    </section>
+
+    <!-- Popular Games Collection Showcase -->
+    <section class="glass-panel p-6 rounded-2xl shadow-xl">
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h3 class="text-xl font-extrabold text-white font-orbitron flex items-center gap-2">
+            <i class="fas fa-trophy text-cyber-cyan"></i> <span data-i18n="gamesTitle">পপুলার গেমস কালেকশন</span>
+          </h3>
+          <p class="text-xs text-gray-400 mt-1" data-i18n="gamesSub">আমাদের লাউঞ্জে প্রতিনিয়ত আপডেট হওয়া টপ রেটেড গেমসমূহ:</p>
+        </div>
+        <span class="text-xs bg-purple-950 border border-purple-800 text-purple-300 font-bold px-3 py-1 rounded-full" data-i18n="gamesBadge">4K @ 60/120 FPS</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <!-- GTA V -->
+        <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="GTA V">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <span class="text-[10px] font-bold bg-pink-600 text-white px-1.5 py-0.5 rounded">Action/Open World</span>
+            <h4 class="font-bold text-white text-sm mt-1">GTA V Premium</h4>
+          </div>
+        </div>
+
+        <!-- EA FC 24 -->
+        <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
+          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="FC 24">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <span class="text-[10px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded">Sports / Football</span>
+            <h4 class="font-bold text-white text-sm mt-1">EA Sports FC 24</h4>
+          </div>
+        </div>
+
+        <!-- Forza Horizon 5 -->
+        <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
+          <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Forza">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <span class="text-[10px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded">Full Racing Sim</span>
+            <h4 class="font-bold text-white text-sm mt-1">Forza Horizon 5</h4>
+          </div>
+        </div>
+
+        <!-- Tekken 8 -->
+        <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
+          <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Tekken 8">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <span class="text-[10px] font-bold bg-purple-600 text-white px-1.5 py-0.5 rounded">Versus Fighting</span>
+            <h4 class="font-bold text-white text-sm mt-1">Tekken 8</h4>
+          </div>
+        </div>
+
+        <!-- Call of Duty -->
+        <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="Warzone">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+          <div class="absolute bottom-2 left-2 right-2">
+            <span class="text-[10px] font-bold bg-red-600 text-white px-1.5 py-0.5 rounded">FPS / Shooter</span>
+            <h4 class="font-bold text-white text-sm mt-1">COD Warzone</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gaming Hardware Showcase -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass-panel p-5 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-cyber-pink/20 text-cyber-pink flex items-center justify-center text-2xl border border-cyber-pink/40">
+          <i class="fas fa-tv"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">4K HDR OLED Displays</h4>
+          <p class="text-xs text-gray-400 mt-0.5">অসম্ভব নিখুঁত রেজুলেশন ও ১২০Hz রিফ্রেশ রেট</p>
+        </div>
+      </div>
+
+      <div class="glass-panel p-5 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-cyber-cyan/20 text-cyber-cyan flex items-center justify-center text-2xl border border-cyber-cyan/40">
+          <i class="fas fa-couch"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">Full AC & Gaming Lounge</h4>
+          <p class="text-xs text-gray-400 mt-0.5">সম্পূর্ণ শীতাতপ নিয়ন্ত্রিত আড্ডামুখর গেমিং পরিবেশ</p>
+        </div>
+      </div>
+
+      <div class="glass-panel p-5 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-cyber-green/20 text-cyber-green flex items-center justify-center text-2xl border border-cyber-green/40">
+          <i class="fas fa-wifi"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">High-Speed Fiber Network</h4>
+          <p class="text-xs text-gray-400 mt-0.5">মাল্টিপ্লেয়ার গেমসে জিরো পিং / লেগ-ফ্রি এক্সপেরিয়েন্স</p>
+        </div>
+      </div>
     </section>
 
     <!-- Admin Panel -->
@@ -438,6 +550,9 @@
         legendBooked: "বুকড",
         labelTotalSelect: "মোট নির্বাচন:",
         btnConfirmBooking: "বুকিং কনফার্ম করুন",
+        gamesTitle: "পপুলার গেমস কালেকশন",
+        gamesSub: "আমাদের লাউঞ্জে প্রতিনিয়ত আপডেট হওয়া টপ রেটেড গেমসমূহ:",
+        gamesBadge: "4K @ 60/120 FPS",
         adminHeader: "বুকিং ও সেলস ড্যাশবোর্ড",
         adminLogout: "লগআউট",
         adminClose: "বন্ধ করুন",
@@ -503,6 +618,9 @@
         legendBooked: "Booked",
         labelTotalSelect: "Total Selected:",
         btnConfirmBooking: "Confirm Booking",
+        gamesTitle: "Popular Games Collection",
+        gamesSub: "Top-rated titles continuously updated at our lounge:",
+        gamesBadge: "4K @ 60/120 FPS",
         adminHeader: "Sales & Booking Dashboard",
         adminLogout: "Logout",
         adminClose: "Close",
@@ -578,7 +696,7 @@
       "09:00 PM - 10:00 PM"
     ];
 
-    // Password set to zerotohero
+    // Admin Password: zerotohero
     const ADMIN_PASSWORD = "zerotohero";
 
     let currentStation = STATIONS[0];
