@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mymensingh Esports Lounge - Slot Booking</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              black: '#07070f',
+              card: '#121324',
+              accent: '#8b5cf6',
+              cyan: '#06b6d4',
+              pink: '#ec4899',
+              green: '#10b981',
+              red: '#ef4444'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Orbitron:wght@600;800;900&display=swap');
+    body { font-family: 'Hind Siliguri', sans-serif; background-color: #07070f; color: #f3f4f6; }
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    
+    /* Custom Scrollbar for Cyberpunk Vibe */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #07070f; }
+    ::-webkit-scrollbar-thumb { background: #1e1b4b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
+    
+    .glow-cyan { box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); }
+    .glow-accent { box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+  </style>
+</head>
+<body class="min-h-screen bg-cyber-black text-gray-100 flex flex-col justify-between selection:bg-cyber-accent selection:text-white">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-transform duration-300 bg-cyber-card border-l-4 border-cyber-cyan p-4 rounded-xl shadow-2xl text-white flex items-center gap-3 border border-gray-800">
+    <i id="toastIcon" class="fas fa-info-circle text-cyber-cyan text-xl"></i>
+    <span id="toastMsg" class="text-sm font-semibold"></span>
+  </div>
+
+  <!-- Top Header Navigation -->
+  <header class="border-b border-gray-800/80 bg-cyber-card/90 backdrop-blur sticky top-0 z-40 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+      
+      <!-- Logo & Lounge Info -->
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyber-accent via-purple-600 to-cyber-cyan flex items-center justify-center text-white text-xl font-black font-orbitron shadow-lg glow-accent">
+          MEL
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-500 font-orbitron">
+            MYMENSINGH ESPORTS LOUNGE
+          </h1>
+          <p class="text-xs text-gray-400 flex flex-wrap items-center gap-2 mt-0.5">
+            <span class="flex items-center gap-1">
+              <i class="fas fa-map-marker-alt text-cyber-pink"></i> 
+              <span data-i18n="headerAddress">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ</span>
+            </span>
+            <span class="hidden sm:inline text-gray-600">|</span>
+            <span class="flex items-center gap-1">
+              <i class="fas fa-phone-alt text-cyber-cyan"></i> 
+              <a href="tel:+8801953013236" class="hover:underline font-mono">+880 1953013236</a>
+            </span>
+          </p>
+        </div>
+      </div>
+      
+      <!-- Right Controls: Language & Admin Panel Toggle -->
+      <div class="flex items-center gap-3">
+        <!-- Language Switcher -->
+        <button onclick="toggleLanguage()" class="px-3 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-xs font-bold text-cyber-cyan transition border border-gray-700/80 flex items-center gap-1.5">
+          <i class="fas fa-globe"></i>
+          <span id="langBtnText">ENG</span>
+        </button>
+
+        <!-- Admin Panel Button -->
+        <button onclick="toggleAdminView()" class="px-3.5 py-1.5 rounded-lg bg-purple-950/60 hover:bg-purple-900/80 text-xs font-bold text-purple-300 transition flex items-center gap-2 border border-purple-700/50 shadow-md">
+          <i class="fas fa-user-shield text-cyber-accent"></i>
+          <span data-i18n="adminPanelBtn">অ্যাডমিন প্যানেল</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
+    
+    <!-- Hero Banner -->
+    <section class="mb-8 rounded-2xl bg-gradient-to-r from-purple-950/60 via-cyber-card to-cyan-950/60 p-6 sm:p-8 border border-gray-800/80 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-cyber-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="max-w-2xl relative z-10">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-cyber-accent/20 text-cyber-accent text-xs font-bold rounded-full mb-3 border border-cyber-accent/40">
+          <i class="fas fa-bolt text-yellow-400"></i> <span data-i18n="heroBadge">প্রিমিয়াম গেমিং এক্সপেরিয়েন্স</span>
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-2 font-orbitron tracking-tight" data-i18n="heroTitle">
+          আপনার পছন্দমতো স্লট বুক করুন
+        </h2>
+        <p class="text-gray-300 text-sm sm:text-base leading-relaxed" data-i18n="heroSub">
+          সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-orbitron">১৫০ টাকা / ঘণ্টা</strong> (১ জন বা ২ জন প্লেয়ার)।
+        </p>
+      </div>
+    </section>
+
+    <!-- Booking Interface Section -->
+    <section id="bookingSection" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Left Column: Date & Console Selection -->
+      <div class="lg:col-span-1 space-y-6">
+        
+        <!-- Date Selector Card -->
+        <div class="bg-cyber-card p-5 rounded-2xl border border-gray-800/80 shadow-xl">
+          <label class="block text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
+            <i class="far fa-calendar-alt text-cyber-cyan text-base"></i>
+            <span data-i18n="selectDateLabel">বুকিংয়ের তারিখ সিলেক্ট করুন:</span>
+          </label>
+          <input type="date" id="bookingDate" class="w-full bg-gray-950 border border-gray-700/80 rounded-xl px-4 py-2.5 text-white font-mono focus:outline-none focus:border-cyber-cyan transition shadow-inner">
+        </div>
+
+        <!-- Station Selector Card -->
+        <div class="bg-cyber-card p-5 rounded-2xl border border-gray-800/80 shadow-xl">
+          <h3 class="text-md font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fas fa-gamepad text-cyber-pink text-lg"></i>
+            <span data-i18n="selectStationLabel">গেমিং স্টেশন নির্বাচন করুন:</span>
+          </h3>
+          <div class="space-y-3" id="stationList">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Time Slots -->
+      <div class="lg:col-span-2">
+        <div class="bg-cyber-card p-6 rounded-2xl border border-gray-800/80 shadow-xl flex flex-col justify-between h-full">
+          
+          <div>
+            <!-- Header for Selected Station & Date -->
+            <div class="flex flex-wrap justify-between items-center mb-6 gap-3 border-b border-gray-800 pb-4">
+              <div>
+                <h3 id="selectedStationTitle" class="text-xl font-bold text-white font-orbitron tracking-wide">
+                  PS5 Console 1
+                </h3>
+                <p id="selectedDateDisplay" class="text-xs text-cyber-cyan mt-1 font-mono">
+                  তারিখ সিলেক্ট করা হয়নি
+                </p>
+              </div>
+              
+              <!-- Slots Legend -->
+              <div class="flex items-center gap-4 text-xs font-semibold">
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-cyber-green/80 border border-cyber-green"></span> <span data-i18n="legendAvailable">ফাঁকা</span></span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-cyber-cyan shadow-sm"></span> <span data-i18n="legendSelected">সিলেক্টেড</span></span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-cyber-red/80 border border-cyber-red"></span> <span data-i18n="legendBooked">বুকড</span></span>
+              </div>
+            </div>
+
+            <!-- Slots Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6" id="slotGrid">
+              <!-- Dynamically Populated Slots -->
+            </div>
+          </div>
+
+          <!-- Checkout Summary Bar -->
+          <div class="bg-gray-950/90 p-4 rounded-xl border border-gray-800/90 flex flex-wrap justify-between items-center gap-4 mt-4 shadow-inner">
+            <div>
+              <span class="text-xs text-gray-400 block" data-i18n="summaryTotalTitle">মোট নির্বাচন:</span>
+              <div class="flex items-baseline gap-2">
+                <span id="selectedSlotsCount" class="text-lg font-bold text-white font-mono">০ টি স্লট</span>
+                <span id="totalPrice" class="text-lg font-bold text-cyber-cyan font-mono">(৳ ০)</span>
+              </div>
+            </div>
+            
+            <button id="checkoutBtn" onclick="openCheckoutModal()" disabled class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyber-accent to-purple-600 hover:from-purple-500 hover:to-indigo-600 disabled:from-gray-800 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-bold transition-all shadow-lg flex items-center gap-2 text-sm">
+              <i class="fas fa-shopping-cart"></i>
+              <span data-i18n="checkoutBtnText">বুকিং কনফার্ম করুন</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Admin Panel (Hidden Toggleable Section) -->
+    <section id="adminSection" class="hidden space-y-6">
+      <div class="bg-cyber-card p-6 rounded-2xl border border-gray-800 shadow-2xl">
+        
+        <div class="flex flex-wrap justify-between items-center mb-6 gap-4 border-b border-gray-800 pb-4">
+          <h2 class="text-2xl font-bold text-white font-orbitron flex items-center gap-2">
+            <i class="fas fa-user-shield text-cyber-accent"></i>
+            <span data-i18n="adminHeaderTitle">বুকিং এডমিন ড্যাশবোর্ড</span>
+          </h2>
+          <button onclick="toggleAdminView()" class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-xs font-bold text-white transition flex items-center gap-2">
+            <i class="fas fa-times"></i> <span data-i18n="adminCloseBtn">বন্ধ করুন</span>
+          </button>
+        </div>
+
+        <!-- Admin Table Search & Filter Bar -->
+        <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+          <div class="relative w-full sm:w-72">
+            <i class="fas fa-search absolute left-3 top-3 text-gray-500 text-xs"></i>
+            <input type="text" id="adminSearch" onkeyup="renderAdminTable()" placeholder="গ্রাহকের নাম বা ফোন দিয়ে খুঁজুন..." class="pl-9 bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-cyber-cyan w-full">
+          </div>
+          <button onclick="clearAllBookings()" class="px-4 py-2 bg-red-950/80 hover:bg-red-900 border border-red-800 text-red-300 rounded-xl text-xs font-bold transition flex items-center gap-2">
+            <i class="fas fa-trash-alt"></i> <span data-i18n="adminClearAll">সব বুকিং রিসেট করুন</span>
+          </button>
+        </div>
+
+        <!-- Admin Table -->
+        <div class="overflow-x-auto rounded-xl border border-gray-800">
+          <table class="w-full text-left text-xs text-gray-300">
+            <thead class="bg-gray-950 text-gray-400 font-semibold uppercase font-mono">
+              <tr>
+                <th class="p-3">তারিখ</th>
+                <th class="p-3">গ্রাহকের নাম</th>
+                <th class="p-3">মোবাইল</th>
+                <th class="p-3">স্টেশন</th>
+                <th class="p-3">স্লট</th>
+                <th class="p-3">মেথড</th>
+                <th class="p-3">Trx ID</th>
+                <th class="p-3 text-right">অ্যাকশন</th>
+              </tr>
+            </thead>
+            <tbody id="adminBookingTable" class="divide-y divide-gray-800/80 bg-cyber-black/40">
+              <!-- Dynamically populated admin entries -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Checkout & Payment Confirmation -->
+  <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-cyber-card w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl p-6 relative max-h-[92vh] overflow-y-auto">
+      
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg transition">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-800 pb-3 flex items-center gap-2 font-orbitron">
+        <i class="fas fa-credit-card text-cyber-cyan"></i>
+        <span data-i18n="modalCheckoutTitle">বুকিং ও পেমেন্ট কনফার্মেশন</span>
+      </h3>
+
+      <!-- Booking Brief -->
+      <div class="bg-gray-950 p-4 rounded-xl mb-4 text-xs space-y-1.5 text-gray-300 border border-gray-800 font-mono">
+        <p><strong>স্টেশন:</strong> <span id="modalStation" class="text-cyber-cyan font-bold"></span></p>
+        <p><strong>তারিখ:</strong> <span id="modalDate" class="text-white"></span></p>
+        <p><strong>স্লট:</strong> <span id="modalSlots" class="text-cyber-pink"></span></p>
+        <p class="text-sm font-bold text-white pt-1 border-t border-gray-800 mt-2"><strong>মোট মূল্য:</strong> <span id="modalTotal" class="text-cyber-green text-base"></span></p>
+      </div>
+
+      <!-- Checkout Form -->
+      <form id="bookingForm" onsubmit="processBooking(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="formNameLabel">আপনার নাম *</label>
+          <input type="text" id="custName" required placeholder="যেমন: রহিম আহমেদ" class="w-full bg-gray-950 border border-gray-700/80 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-cyber-cyan">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="formPhoneLabel">মোবাইল নম্বর *</label>
+          <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full bg-gray-950 border border-gray-700/80 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyber-cyan">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="formPlayerLabel">প্লেয়ার সংখ্যা</label>
+          <select id="custPlayers" class="w-full bg-gray-950 border border-gray-700/80 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-cyber-cyan">
+            <option value="1 Player">১ জন প্লেয়ার (১৫০ টাকা/ঘণ্টা)</option>
+            <option value="2 Players">২ জন প্লেয়ার (১৫০ টাকা/ঘণ্টা)</option>
+          </select>
+        </div>
+
+        <!-- Payment Method Options -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1.5" data-i18n="formPaymentMethodLabel">পেমেন্ট মেথড সিলেক্ট করুন *</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" onclick="selectPayment('bkash')" id="payBkash" class="pay-option border border-gray-800 rounded-xl p-2.5 text-center bg-gray-950 hover:border-pink-500 transition flex flex-col items-center justify-center gap-1">
+              <span class="block text-xs font-bold text-pink-500 font-orbitron">bKash</span>
+            </button>
+            <button type="button" onclick="selectPayment('nagad')" id="payNagad" class="pay-option border border-gray-800 rounded-xl p-2.5 text-center bg-gray-950 hover:border-orange-500 transition flex flex-col items-center justify-center gap-1">
+              <span class="block text-xs font-bold text-orange-500 font-orbitron">Nagad</span>
+            </button>
+            <button type="button" onclick="selectPayment('cash')" id="payCash" class="pay-option border border-gray-800 rounded-xl p-2.5 text-center bg-gray-950 hover:border-cyber-green transition flex flex-col items-center justify-center gap-1">
+              <span class="block text-xs font-bold text-green-400 font-orbitron">Cash</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Banking Instructions -->
+        <div id="merchantInfoBox" class="hidden bg-purple-950/40 border border-purple-800/80 p-3 rounded-xl text-xs space-y-2">
+          <p class="text-purple-200" data-i18n="merchantInstruction">
+            নিচের নম্বরে <strong>Send Money / Cash-In</strong> করে ট্রানজেকশন আইডি প্রদান করুন:
+          </p>
+          <div class="flex items-center justify-between bg-gray-950 p-2 rounded-lg border border-purple-900 font-mono">
+            <span class="font-bold text-white text-sm">+8801953013236</span>
+            <button type="button" onclick="copyMerchantNumber('+8801953013236')" class="text-cyber-cyan hover:underline text-xs flex items-center gap-1">
+              <i class="far fa-copy"></i> <span data-i18n="copyBtn">কপি করুন</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mandatory TrxID Field -->
+        <div id="trxIdBox" class="hidden">
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="formTrxLabel">
+            বিকাশ / নগদ ট্রানজেকশন আইডি (TrxID) *
+          </label>
+          <input type="text" id="custTrxId" placeholder="যেমন: 9B7A2X8K" oninput="validateTrxIdInput()" class="w-full bg-gray-950 border border-gray-700/80 rounded-xl px-3.5 py-2 text-xs text-white font-mono uppercase focus:outline-none focus:border-cyber-cyan">
+          
+          <!-- Live Validation Feedback Badge -->
+          <div id="trxStatusMsg" class="mt-1.5 text-xs text-red-400 flex items-center gap-1.5 font-medium">
+            <i class="fas fa-exclamation-circle"></i>
+            <span data-i18n="trxRequiredMsg">ট্রানজেকশন আইডি প্রদান করা বাধ্যতামূলক (কমপক্ষে ৮ অক্ষর)।</span>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBookingBtn" class="w-full py-3 rounded-xl bg-cyber-green hover:bg-emerald-600 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2">
+          <i class="fas fa-check-circle"></i>
+          <span data-i18n="formSubmitBtn">বুকিং সম্পন্ন করুন</span>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Modal: Receipt Popup Ticket -->
+  <div id="receiptModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-cyber-card border border-cyber-cyan/50 max-w-sm w-full rounded-2xl p-6 text-center shadow-2xl relative">
+      
+      <div class="w-14 h-14 bg-cyber-green/20 text-cyber-green rounded-full flex items-center justify-center mx-auto mb-3 text-3xl shadow-inner">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h3 class="text-xl font-black text-white font-orbitron" data-i18n="receiptTitle">বুকিং সফল হয়েছে!</h3>
+      <p class="text-xs text-gray-400 mb-4" data-i18n="receiptSub">Mymensingh Esports Lounge-এ আসার সময় এই রসিদটি দেখাবেন।</p>
+
+      <div id="receiptDetails" class="bg-gray-950 text-left p-4 rounded-xl text-xs space-y-2 mb-4 text-gray-300 border border-gray-800 font-mono">
+        <!-- Dynamically Populated Receipt Data -->
+      </div>
+
+      <button onclick="closeReceiptModal()" class="w-full py-2.5 bg-cyber-cyan hover:bg-cyan-600 text-gray-950 font-black rounded-xl transition text-sm font-orbitron">
+        OK / ঠিক আছে
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-800/80 bg-cyber-card/40 py-6 mt-12 text-center text-xs text-gray-500">
+    <p>© 2026 Mymensingh Esports Lounge. All Rights Reserved.</p>
+    <p class="mt-1 text-gray-600" data-i18n="footerSub">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236</p>
+  </footer>
+
+  <!-- Application Logic & Interactive Script -->
+  <script>
+    // Console Stations Data
+    const STATIONS = [
+      { id: 'ps5-1', name: 'PS5 Console 1', desc: '4K Ultra HD Gaming + 2 DualSense Controllers', price: 150 },
+      { id: 'ps5-2', name: 'PS5 Console 2', desc: '4K Ultra HD Gaming + FIFA & Racing Setup', price: 150 },
+      { id: 'ps4-race', name: 'PS4 Racing Simulator', desc: 'Logitech Steering Wheel & Pedal Cockpit', price: 150 },
+      { id: 'pc-rig', name: 'High-End Gaming PC', desc: 'RTX 4070 Ti, 240Hz Monitor, Mechanical Rig', price: 150 }
+    ];
+
+    // 1-Hour Time Slots from 10:00 AM to 10:00 PM
+    const TIME_SLOTS = [
+      "10:00 AM - 11:00 AM",
+      "11:00 AM - 12:00 PM",
+      "12:00 PM - 01:00 PM",
+      "01:00 PM - 02:00 PM",
+      "02:00 PM - 03:00 PM",
+      "03:00 PM - 04:00 PM",
+      "04:00 PM - 05:00 PM",
+      "05:00 PM - 06:00 PM",
+      "06:00 PM - 07:00 PM",
+      "07:00 PM - 08:00 PM",
+      "08:00 PM - 09:00 PM",
+      "09:00 PM - 10:00 PM"
+    ];
+
+    // Language Dictionaries
+    const i18n = {
+      bn: {
+        headerAddress: "কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ",
+        adminPanelBtn: "অ্যাডমিন প্যানেল",
+        heroBadge: "প্রিমিয়াম গেমিং এক্সপেরিয়েন্স",
+        heroTitle: "আপনার পছন্দমতো স্লট বুক করুন",
+        heroSub: "সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট ১৫০ টাকা / ঘণ্টা (১ জন বা ২ জন প্লেয়ার)।",
+        selectDateLabel: "বুকিংয়ের তারিখ সিলেক্ট করুন:",
+        selectStationLabel: "গেমিং স্টেশন নির্বাচন করুন:",
+        legendAvailable: "ফাঁকা",
+        legendSelected: "সিলেক্টেড",
+        legendBooked: "বুকড",
+        summaryTotalTitle: "মোট নির্বাচন:",
+        checkoutBtnText: "বুকিং কনফার্ম করুন",
+        adminHeaderTitle: "বুকিং এডমিন ড্যাশবোর্ড",
+        adminCloseBtn: "বন্ধ করুন",
+        adminClearAll: "সব বুকিং রিসেট করুন",
+        modalCheckoutTitle: "বুকিং ও পেমেন্ট কনফার্মেশন",
+        formNameLabel: "আপনার নাম *",
+        formPhoneLabel: "মোবাইল নম্বর *",
+        formPlayerLabel: "প্লেয়ার সংখ্যা",
+        formPaymentMethodLabel: "পেমেন্ট মেথড সিলেক্ট করুন *",
+        merchantInstruction: "নিচের নম্বরে Send Money / Cash-In করে ট্রানজেকশন আইডি প্রদান করুন:",
+        copyBtn: "কপি করুন",
+        formTrxLabel: "বিকাশ / নগদ ট্রানজেকশন আইডি (TrxID) *",
+        trxRequiredMsg: "ট্রানজেকশন আইডি প্রদান করা বাধ্যতামূলক (কমপক্ষে ৮ অক্ষর)।",
+        formSubmitBtn: "বুকিং সম্পন্ন করুন",
+        receiptTitle: "বুকিং সফল হয়েছে!",
+        receiptSub: "Mymensingh Esports Lounge-এ আসার সময় এই রসিদটি দেখাবেন।",
+        footerSub: "কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236"
+      },
+      en: {
+        headerAddress: "Kulsum Market 2nd Floor, Maskanda, Mymensingh",
+        adminPanelBtn: "Admin Panel",
+        heroBadge: "Premium Gaming Experience",
+        heroTitle: "Book Your Preferred Gaming Slots",
+        heroSub: "Flat Rate 150 BDT / Hour from 10:00 AM to 10:00 PM (1 or 2 Players).",
+        selectDateLabel: "Select Booking Date:",
+        selectStationLabel: "Choose Gaming Station:",
+        legendAvailable: "Available",
+        legendSelected: "Selected",
+        legendBooked: "Booked",
+        summaryTotalTitle: "Total Selected:",
+        checkoutBtnText: "Proceed to Checkout",
+        adminHeaderTitle: "Booking Admin Dashboard",
+        adminCloseBtn: "Close",
+        adminClearAll: "Reset All Bookings",
+        modalCheckoutTitle: "Booking & Payment Confirmation",
+        formNameLabel: "Your Name *",
+        formPhoneLabel: "Mobile Number *",
+        formPlayerLabel: "Number of Players",
+        formPaymentMethodLabel: "Select Payment Method *",
+        merchantInstruction: "Please Send Money / Cash-In to the number below and provide TrxID:",
+        copyBtn: "Copy Number",
+        formTrxLabel: "bKash / Nagad Transaction ID (TrxID) *",
+        trxRequiredMsg: "Transaction ID is required (minimum 8 characters).",
+        formSubmitBtn: "Confirm Booking",
+        receiptTitle: "Booking Confirmed!",
+        receiptSub: "Please present this receipt when you visit Mymensingh Esports Lounge.",
+        footerSub: "Kulsum Market 2nd Floor, Maskanda, Mymensingh | Hotline: +880 1953013236"
+      }
+    };
+
+    // Application State
+    let currentLang = 'bn';
+    let currentStation = STATIONS[0];
+    let selectedDate = new Date().toISOString().split('T')[0];
+    let selectedSlots = [];
+    let selectedPaymentMethod = 'cash';
+
+    // Application Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('bookingDate').value = selectedDate;
+      document.getElementById('bookingDate').min = selectedDate;
+      
+      renderStationList();
+      updateSelectedDateDisplay();
+      renderSlotsGrid();
+
+      document.getElementById('bookingDate').addEventListener('change', (e) => {
+        selectedDate = e.target.value;
+        selectedSlots = [];
+        updateSelectedDateDisplay();
+        renderSlotsGrid();
+        updateCheckoutSummary();
+      });
+    });
+
+    // Language Toggle Helper
+    function toggleLanguage() {
+      currentLang = currentLang === 'bn' ? 'en' : 'bn';
+      document.getElementById('langBtnText').innerText = currentLang === 'bn' ? 'ENG' : 'বাংলা';
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[currentLang][key]) {
+          el.innerText = i18n[currentLang][key];
+        }
+      });
+
+      updateSelectedDateDisplay();
+      updateCheckoutSummary();
+    }
+
+    // Toast Notification System
+    function showToast(msg, type = 'info') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-x-full');
+      setTimeout(() => {
+        toast.classList.add('translate-x-full');
+      }, 3000);
+    }
+
+    // Render Station Selector Cards
+    function renderStationList() {
+      const container = document.getElementById('stationList');
+      container.innerHTML = STATIONS.map(st => `
+        <div onclick="selectStation('${st.id}')" class="p-3.5 rounded-xl border ${st.id === currentStation.id ? 'border-cyber-cyan bg-cyan-950/20 glow-cyan' : 'border-gray-800 bg-gray-950'} hover:border-gray-600 cursor-pointer transition flex justify-between items-center">
+          <div>
+            <h4 class="font-bold text-sm text-white">${st.name}</h4>
+            <p class="text-xs text-gray-400 mt-0.5">${st.desc}</p>
+          </div>
+          <span class="text-xs font-bold text-cyber-cyan font-mono bg-cyber-cyan/10 px-2 py-1 rounded-lg border border-cyber-cyan/30">৳${st.price}/h</span>
+        </div>
+      `).join('');
+    }
+
+    // Switch Selected Gaming Station
+    function selectStation(id) {
+      currentStation = STATIONS.find(s => s.id === id);
+      selectedSlots = [];
+      document.getElementById('selectedStationTitle').innerText = currentStation.name;
+      renderStationList();
+      renderSlotsGrid();
+      updateCheckoutSummary();
+    }
+
+    function updateSelectedDateDisplay() {
+      const label = currentLang === 'bn' ? 'নির্বাচিত তারিখ' : 'Selected Date';
+      document.getElementById('selectedDateDisplay').innerText = `${label}: ${selectedDate}`;
+    }
+
+    // Query booked slots from LocalStorage
+    function getBookedSlotsForCurrentStation() {
+      const allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
+      return allBookings.filter(b => b.date === selectedDate && b.stationId === currentStation.id)
+                        .flatMap(b => b.slots);
+    }
+
+    // Render Time Slots Grid
+    function renderSlotsGrid() {
+      const grid = document.getElementById('slotGrid');
+      const bookedSlots = getBookedSlotsForCurrentStation();
+
+      grid.innerHTML = TIME_SLOTS.map(slot => {
+        const isBooked = bookedSlots.includes(slot);
+        const isSelected = selectedSlots.includes(slot);
+
+        let btnClass = "bg-gray-950 border-cyber-green/40 text-cyber-green hover:bg-cyber-green/10";
+        if (isBooked) {
+          btnClass = "bg-red-950/30 border-red-900/60 text-red-500 cursor-not-allowed opacity-60";
+        } else if (isSelected) {
+          btnClass = "bg-cyber-cyan text-gray-950 font-bold border-cyber-cyan shadow-md";
+        }
+
+        return `
+          <button 
+            ${isBooked ? 'disabled' : ''} 
+            onclick="toggleSlot('${slot}')" 
+            class="p-3 rounded-xl border text-xs font-semibold text-center transition-all flex flex-col items-center justify-center gap-1.5 ${btnClass}">
+            <i class="${isBooked ? 'fas fa-lock' : (isSelected ? 'fas fa-check-circle' : 'far fa-clock')}"></i>
+            <span class="font-mono">${slot}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function toggleSlot(slot) {
+      if (selectedSlots.includes(slot)) {
+        selectedSlots = selectedSlots.filter(s => s !== slot);
+      } else {
+        selectedSlots.push(slot);
+      }
+      renderSlotsGrid();
+      updateCheckoutSummary();
+    }
+
+    function updateCheckoutSummary() {
+      const count = selectedSlots.length;
+      const total = count * currentStation.price;
+      const slotUnit = currentLang === 'bn' ? 'টি স্লট' : 'Slots';
+      document.getElementById('selectedSlotsCount').innerText = `${count} ${slotUnit}`;
+      document.getElementById('totalPrice').innerText = `(৳ ${total})`;
+      document.getElementById('checkoutBtn').disabled = count === 0;
+    }
+
+    // Modal Control Functions
+    function openCheckoutModal() {
+      if (selectedSlots.length === 0) return;
+      
+      document.getElementById('modalStation').innerText = currentStation.name;
+      document.getElementById('modalDate').innerText = selectedDate;
+      document.getElementById('modalSlots').innerText = selectedSlots.join(', ');
+      document.getElementById('modalTotal').innerText = `৳ ${selectedSlots.length * currentStation.price}`;
+
+      selectPayment('cash');
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    // Payment Selection Logic
+    function selectPayment(method) {
+      selectedPaymentMethod = method;
+      document.querySelectorAll('.pay-option').forEach(el => el.classList.remove('border-cyber-cyan', 'bg-purple-900/30'));
+      
+      const merchantBox = document.getElementById('merchantInfoBox');
+      const trxIdBox = document.getElementById('trxIdBox');
+
+      if (method === 'bkash') {
+        document.getElementById('payBkash').classList.add('border-cyber-cyan', 'bg-purple-900/30');
+        merchantBox.classList.remove('hidden');
+        trxIdBox.classList.remove('hidden');
+      } else if (method === 'nagad') {
+        document.getElementById('payNagad').classList.add('border-cyber-cyan', 'bg-purple-900/30');
+        merchantBox.classList.remove('hidden');
+        trxIdBox.classList.remove('hidden');
+      } else {
+        document.getElementById('payCash').classList.add('border-cyber-cyan', 'bg-purple-900/30');
+        merchantBox.classList.add('hidden');
+        trxIdBox.classList.add('hidden');
+      }
+
+      validateTrxIdInput();
+    }
+
+    // Strict TrxID Input Validation (Minimum 8 Characters)
+    function validateTrxIdInput() {
+      const submitBtn = document.getElementById('submitBookingBtn');
+      if (selectedPaymentMethod === 'cash') {
+        submitBtn.disabled = false;
+        return true;
+      }
+
+      const trxVal = document.getElementById('custTrxId').value.trim();
+      const statusMsg = document.getElementById('trxStatusMsg');
+
+      if (trxVal.length >= 8) {
+        statusMsg.className = "mt-1.5 text-xs text-green-400 flex items-center gap-1.5 font-medium";
+        statusMsg.innerHTML = '<i class="fas fa-check-circle"></i> <span>' + (currentLang === 'bn' ? 'ট্রানজেকশন আইডি ভেরিফাইড হয়েছে।' : 'Transaction ID Verified.') + '</span>';
+        submitBtn.disabled = false;
+        return true;
+      } else {
+        statusMsg.className = "mt-1.5 text-xs text-red-400 flex items-center gap-1.5 font-medium";
+        statusMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> <span>' + (currentLang === 'bn' ? 'কমপক্ষে ৮ অক্ষরের ট্রানজেকশন আইডি প্রদান করুন।' : 'Transaction ID must be at least 8 chars.') + '</span>';
+        submitBtn.disabled = true;
+        return false;
+      }
+    }
+
+    function copyMerchantNumber(num) {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = num;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast(currentLang === 'bn' ? 'মার্চেন্ট নম্বর কপি হয়েছে!' : 'Merchant number copied!');
+    }
+
+    // Save Booking & Process Form
+    function processBooking(event) {
+      event.preventDefault();
+
+      if (selectedPaymentMethod !== 'cash' && !validateTrxIdInput()) {
+        showToast(currentLang === 'bn' ? 'অনুগ্রহ করে সঠিক ট্রানজেকশন আইডি প্রদান করুন' : 'Please enter a valid TrxID', 'error');
+        return;
+      }
+
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const players = document.getElementById('custPlayers').value;
+      const trxId = selectedPaymentMethod === 'cash' ? 'N/A (Cash)' : document.getElementById('custTrxId').value.trim();
+
+      const newBooking = {
+        id: 'MEL-' + Date.now().toString().slice(-6),
+        stationId: currentStation.id,
+        stationName: currentStation.name,
+        date: selectedDate,
+        slots: [...selectedSlots],
+        totalAmount: selectedSlots.length * currentStation.price,
+        customerName: name,
+        customerPhone: phone,
+        players: players,
+        paymentMethod: selectedPaymentMethod.toUpperCase(),
+        trxId: trxId,
+        timestamp: new Date().toLocaleString()
+      };
+
+      // Store in LocalStorage
+      const existing = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
+      existing.push(newBooking);
+      localStorage.setItem('mel_bookings', JSON.stringify(existing));
+
+      closeCheckoutModal();
+      showReceipt(newBooking);
+
+      // Reset App State
+      selectedSlots = [];
+      document.getElementById('bookingForm').reset();
+      renderSlotsGrid();
+      updateCheckoutSummary();
+    }
+
+    // Receipt Modal Display
+    function showReceipt(booking) {
+      const details = document.getElementById('receiptDetails');
+      details.innerHTML = `
+        <p><strong>বুকিং আইডি:</strong> <span class="text-cyber-cyan font-bold">${booking.id}</span></p>
+        <p><strong>নাম:</strong> ${booking.customerName}</p>
+        <p><strong>মোবাইল:</strong> ${booking.customerPhone}</p>
+        <p><strong>স্টেশন:</strong> ${booking.stationName}</p>
+        <p><strong>তারিখ:</strong> ${booking.date}</p>
+        <p><strong>স্লট:</strong> ${booking.slots.join(', ')}</p>
+        <p><strong>পেমেন্ট:</strong> ${booking.paymentMethod} (${booking.trxId})</p>
+        <p class="text-sm font-bold text-white pt-2 border-t border-gray-800 mt-2"><strong>মোট পরিশোধিত:</strong> ৳${booking.totalAmount}</p>
+      `;
+      document.getElementById('receiptModal').classList.remove('hidden');
+    }
+
+    function closeReceiptModal() {
+      document.getElementById('receiptModal').classList.add('hidden');
+    }
+
+    // Admin Dashboard Handlers
+    function toggleAdminView() {
+      const adminSec = document.getElementById('adminSection');
+      const bookingSec = document.getElementById('bookingSection');
+      
+      if (adminSec.classList.contains('hidden')) {
+        adminSec.classList.remove('hidden');
+        bookingSec.classList.add('hidden');
+        renderAdminTable();
+      } else {
+        adminSec.classList.add('hidden');
+        bookingSec.classList.remove('hidden');
+      }
+    }
+
+    function renderAdminTable() {
+      const allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
+      const query = document.getElementById('adminSearch').value.toLowerCase();
+      const tableBody = document.getElementById('adminBookingTable');
+
+      const filtered = allBookings.filter(b => 
+        b.customerName.toLowerCase().includes(query) || 
+        b.customerPhone.includes(query)
+      );
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="8" class="text-center p-4 text-gray-500">কোনো বুকিং পাওয়া যায়নি।</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map(b => `
+        <tr class="hover:bg-gray-800/40">
+          <td class="p-3 text-xs font-mono">${b.date}</td>
+          <td class="p-3 font-semibold text-white">${b.customerName}</td>
+          <td class="p-3 text-xs font-mono">${b.customerPhone}</td>
+          <td class="p-3 text-xs text-cyber-cyan">${b.stationName}</td>
+          <td class="p-3 text-xs">${b.slots.length} Slots</td>
+          <td class="p-3 text-xs font-bold ${b.paymentMethod === 'CASH' ? 'text-green-400' : 'text-pink-400'}">${b.paymentMethod}</td>
+          <td class="p-3 text-xs font-mono text-yellow-400">${b.trxId}</td>
+          <td class="p-3 text-right">
+            <button onclick="cancelBooking('${b.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold transition">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function cancelBooking(id) {
+      if (confirm(currentLang === 'bn' ? 'আপনি কি সত্যিই এই বুকিংটি বাতিল করতে চান?' : 'Are you sure you want to cancel this booking?')) {
+        let allBookings = JSON.parse(localStorage.getItem('mel_bookings') || '[]');
+        allBookings = allBookings.filter(b => b.id !== id);
+        localStorage.setItem('mel_bookings', JSON.stringify(allBookings));
+        renderAdminTable();
+        showToast(currentLang === 'bn' ? 'বুকিং বাতিল করা হয়েছে' : 'Booking cancelled');
+      }
+    }
+
+    function clearAllBookings() {
+      if (confirm(currentLang === 'bn' ? 'সব বুকিং ডাটা মুছে ফেলা হবে! আপনি কি নিশ্চিত?' : 'Clear all stored bookings?')) {
+        localStorage.removeItem('mel_bookings');
+        renderAdminTable();
+        showToast(currentLang === 'bn' ? 'সব ডাটা মুছে ফেলা হয়েছে' : 'All bookings reset');
+      }
+    }
+  </script>
+</body>
+</html>
