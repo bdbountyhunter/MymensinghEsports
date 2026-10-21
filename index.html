@@ -49,6 +49,26 @@
     .glow-cyan { box-shadow: 0 0 30px rgba(0, 242, 254, 0.25); }
     .glow-accent { box-shadow: 0 0 35px rgba(124, 58, 237, 0.3); }
     .glass-panel { background: rgba(12, 13, 29, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(124, 58, 237, 0.3); }
+    
+    /* Blurring Glass Button Effects */
+    .blur-btn-wa {
+      background: rgba(16, 185, 129, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(16, 185, 129, 0.5);
+    }
+    .blur-btn-wa:hover {
+      background: rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+    .blur-btn-fb {
+      background: rgba(59, 130, 246, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(59, 130, 246, 0.5);
+    }
+    .blur-btn-fb:hover {
+      background: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    }
 
     @media print {
       body * { visibility: hidden; }
@@ -59,20 +79,6 @@
   </style>
 </head>
 <body class="min-h-screen text-gray-100 flex flex-col justify-between selection:bg-cyber-cyan selection:text-black">
-
-  <!-- Opening / Coming Soon Announcement Ticker -->
-  <div class="bg-gradient-to-r from-purple-950 via-cyber-card to-cyan-950 border-b border-purple-900/50 py-2 px-4 text-xs flex items-center justify-between overflow-hidden shadow-md">
-    <div class="flex items-center gap-2 max-w-7xl mx-auto w-full">
-      <span class="flex h-2.5 w-2.5 relative">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-pink opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyber-pink"></span>
-      </span>
-      <span class="font-bold text-cyber-pink font-orbitron uppercase text-[10px] tracking-wider" id="announcementTag">ANNOUNCEMENT:</span>
-      <marquee class="text-gray-200 font-bold text-xs" id="marqueeText">
-        🚀 কামিং সুন! দ্য গেম রুম খুব শীঘ্রই আপনার শহরে অফিশিয়ালি ওপেন হতে যাচ্ছে। স্লট বুকিংয়ের জন্য তৈরি থাকুন!
-      </marquee>
-    </div>
-  </div>
 
   <!-- Toast Notification -->
   <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-all duration-300 glass-panel border-l-4 border-cyber-cyan p-4 rounded-xl shadow-2xl text-white flex items-center gap-3">
@@ -100,13 +106,30 @@
             <span class="bg-cyan-950/70 border border-cyan-800/80 text-cyan-200 px-2.5 py-0.5 rounded-full font-bold font-orbitron flex items-center gap-1.5">
               <i class="fas fa-phone-alt text-cyber-cyan"></i> <span id="headerPhone">+880 1953013236</span>
             </span>
-            <!-- WhatsApp Direct Button -->
-            <a href="https://wa.me/8801906531465?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room%20slots!" target="_blank" class="bg-emerald-950/80 border border-emerald-700/80 text-emerald-300 hover:bg-emerald-900 px-2.5 py-0.5 rounded-full font-bold transition flex items-center gap-1.5 shadow">
-              <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span data-i18n="whatsappHeader">WhatsApp</span>
-            </a>
+            
+            <!-- WhatsApp Dropdown Button -->
+            <div class="relative group">
+              <button class="blur-btn-wa text-emerald-300 px-3 py-1 rounded-full font-bold transition flex items-center gap-1.5 text-xs">
+                <i class="fab fa-whatsapp text-emerald-400 text-base drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]"></i> 
+                <span>WhatsApp</span>
+                <i class="fas fa-chevron-down text-[10px] opacity-70"></i>
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div class="absolute left-0 mt-1 w-48 glass-panel rounded-xl shadow-2xl p-2 hidden group-hover:block z-50 border border-emerald-500/40">
+                <a href="https://wa.me/8801953013236?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room!" target="_blank" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/80 text-xs font-bold text-gray-200 hover:text-emerald-300 transition flex items-center gap-2">
+                  <i class="fab fa-whatsapp text-emerald-400"></i> +880 1953013236
+                </a>
+                <a href="https://wa.me/8801906531465?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room!" target="_blank" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/80 text-xs font-bold text-gray-200 hover:text-emerald-300 transition flex items-center gap-2 border-t border-gray-800/80 mt-1 pt-1">
+                  <i class="fab fa-whatsapp text-emerald-400"></i> +880 1906531465
+                </a>
+              </div>
+            </div>
+
             <!-- Facebook Direct Link -->
-            <a href="https://facebook.com/tthegameroom" target="_blank" class="bg-blue-950/80 border border-blue-700/80 text-blue-300 hover:bg-blue-900 px-2.5 py-0.5 rounded-full font-bold transition flex items-center gap-1.5 shadow">
-              <i class="fab fa-facebook text-blue-400 text-sm"></i> <span>Facebook</span>
+            <a href="https://facebook.com/tthegameroom" target="_blank" class="blur-btn-fb text-blue-300 px-3 py-1 rounded-full font-bold transition flex items-center gap-1.5 text-xs">
+              <i class="fab fa-facebook text-blue-400 text-base drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]"></i> 
+              <span>Facebook</span>
             </a>
           </div>
         </div>
@@ -206,7 +229,7 @@
 
     </section>
 
-    <!-- Latest Popular Games 2026 Showcase -->
+    <!-- Latest Popular Games Showcase -->
     <section class="glass-panel p-6 rounded-2xl shadow-xl">
       <div class="flex justify-between items-center mb-6">
         <div>
@@ -229,12 +252,12 @@
           </div>
         </div>
 
-        <!-- EA FC 26 -->
+        <!-- EA FC 26 / Free Fire -->
         <div class="group relative rounded-xl overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all">
-          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=500&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="FC 26">
+          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=500&auto=format&fit=crop" class="w-full h-44 object-cover group-hover:scale-105 transition duration-300" alt="FC 26 / Free Fire">
           <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
           <div class="absolute bottom-2 left-2 right-2">
-            <span class="text-[10px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded">Sports</span>
+            <span class="text-[10px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded">Trending</span>
             <h4 class="font-bold text-white text-sm mt-1">EA Sports FC 26</h4>
           </div>
         </div>
@@ -504,15 +527,34 @@
   </div>
 
   <!-- Footer -->
-  <footer class="border-t border-purple-900/40 glass-panel py-6 mt-12 text-center text-xs text-gray-400 font-medium space-y-2">
+  <footer class="border-t border-purple-900/40 glass-panel py-6 mt-12 text-center text-xs text-gray-400 font-medium space-y-3">
     <p>© 2026 The Game Room. All Rights Reserved.</p>
     <p data-i18n="footerAddress">কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ | হটলাইন: +880 1953013236</p>
-    <div class="flex justify-center items-center gap-3 pt-2">
-      <a href="https://wa.me/8801906531465?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room%20slots!" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-700/80 text-emerald-300 hover:bg-emerald-900 font-bold transition text-xs shadow">
-        <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span data-i18n="whatsappFooter">WhatsApp-এ চ্যাট করুন</span>
-      </a>
-      <a href="https://facebook.com/tthegameroom" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-700/80 text-blue-300 hover:bg-blue-900 font-bold transition text-xs shadow">
-        <i class="fab fa-facebook text-blue-400 text-sm"></i> <span>Facebook Page</span>
+    
+    <div class="flex justify-center items-center gap-3 pt-1">
+      <!-- Footer WhatsApp Dropdown Button -->
+      <div class="relative group">
+        <button class="blur-btn-wa text-emerald-300 px-4 py-1.5 rounded-full font-bold transition flex items-center gap-1.5 text-xs">
+          <i class="fab fa-whatsapp text-emerald-400 text-base drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]"></i> 
+          <span>WhatsApp-এ চ্যাট করুন</span>
+          <i class="fas fa-chevron-down text-[10px] opacity-70"></i>
+        </button>
+        
+        <!-- Dropdown Menu -->
+        <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-48 glass-panel rounded-xl shadow-2xl p-2 hidden group-hover:block z-50 border border-emerald-500/40">
+          <a href="https://wa.me/8801953013236?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room!" target="_blank" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/80 text-xs font-bold text-gray-200 hover:text-emerald-300 transition flex items-center gap-2">
+            <i class="fab fa-whatsapp text-emerald-400"></i> +880 1953013236
+          </a>
+          <a href="https://wa.me/8801906531465?text=Hello,%20I%20want%20to%20know%20more%20about%20The%20Game%20Room!" target="_blank" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/80 text-xs font-bold text-gray-200 hover:text-emerald-300 transition flex items-center gap-2 border-t border-gray-800/80 mt-1 pt-1">
+            <i class="fab fa-whatsapp text-emerald-400"></i> +880 1906531465
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer Facebook Link -->
+      <a href="https://facebook.com/tthegameroom" target="_blank" class="blur-btn-fb text-blue-300 px-4 py-1.5 rounded-full font-bold transition flex items-center gap-1.5 text-xs">
+        <i class="fab fa-facebook text-blue-400 text-base drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]"></i> 
+        <span>Facebook Page</span>
       </a>
     </div>
   </footer>
@@ -524,10 +566,6 @@
       BN: {
         address: "কুলসুম মার্কেট ২য় তলা, মাসকান্দা, ময়মনসিংহ",
         phoneNum: "+৮৮০ ১৯৫৩০ ১৩২৩৬",
-        whatsappHeader: "WhatsApp",
-        whatsappFooter: "WhatsApp-এ চ্যাট করুন",
-        announcementTag: "ঘোষণা:",
-        marqueeText: "🚀 কামিং সুন! দ্য গেম রুম খুব শীঘ্রই আপনার শহরে অফিশিয়ালি ওপেন হতে যাচ্ছে। স্লট বুকিংয়ের জন্য তৈরি থাকুন!",
         adminBtn: "অ্যাডমিন প্যানেল",
         heroBadge: "⚡ প্রিমিয়াম গেমিং লাউঞ্জ ও ই-স্পোর্টস হাব",
         heroTitle: "আপনার গেমিং স্লট বুক করুন",
@@ -596,10 +634,6 @@
       EN: {
         address: "Kulsum Market 2nd Floor, Maskanda, Mymensingh",
         phoneNum: "+880 1953013236",
-        whatsappHeader: "WhatsApp",
-        whatsappFooter: "Chat on WhatsApp",
-        announcementTag: "ANNOUNCEMENT:",
-        marqueeText: "🚀 Coming Soon! The Game Room is officially opening very soon in your city. Get ready to book your slots!",
         adminBtn: "Admin Panel",
         heroBadge: "⚡ Premium Gaming Lounge & Esports Hub",
         heroTitle: "Book Your Gaming Slot",
@@ -749,8 +783,6 @@
 
       document.getElementById('headerPhone').innerText = t.phoneNum;
       document.getElementById('modalMerchantNum').innerText = t.phoneNum;
-      document.getElementById('announcementTag').innerText = t.announcementTag;
-      document.getElementById('marqueeText').innerText = t.marqueeText;
 
       document.getElementById('heroDesc').innerHTML = (currentLang === 'BN') 
         ? `সকাল ১০:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত ফ্ল্যাট রেট <strong class="text-cyber-cyan font-bold">${t.heroRateText}</strong> (১ জন বা ২ জন প্লেয়ার)।`
